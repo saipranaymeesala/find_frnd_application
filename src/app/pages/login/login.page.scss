@@ -1,0 +1,28 @@
+ion-input{
+    width:auto;
+    margin:20px;
+    color:whitesmoke;
+    border-color: whitesmoke;
+    label{
+        color:whitesmoke;
+    }
+    label-placement{
+        color:whitesmoke;
+    }
+}
+ 
+#resendBtn{
+    margin-top:-10px;
+    margin-right:10px;
+width:125px;
+text-transform: none;
+}
+ 
+p{
+margin-left:20px;
+display: inline;
+}
+
+ion-content {
+    --background: #fe9900;
+  }

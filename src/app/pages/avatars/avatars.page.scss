@@ -1,0 +1,36 @@
+.avatar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
+
+  ion-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  ion-avatar ion-img{
+    width: auto;
+    height: auto;
+    border-radius: 50%;
+    transition: border 0.3s ease;
+    justify-content: space-evenly;
+  }
+
+  ion-avatar.selected ion-img {
+    border: 5px solid rgb(19, 213, 2);
+  }
+
+  ion-content {
+    --background: #fe9900;
+  }
+  ion-icon{
+    color: white;
+  }
+  ion-toolbar{
+color: white;
+  }
+ 

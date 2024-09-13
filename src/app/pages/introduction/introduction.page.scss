@@ -1,0 +1,135 @@
+.swiper-slide {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.div-container {
+    background: linear-gradient(#fe9900, #ffff);
+    background-size: cover;
+    // padding: 10px 10px 10px 10px;
+    
+
+}
+.footer-container {
+    height: 30%;
+    border-top-left-radius: 20%;
+    border-top-right-radius: 20%;
+    background-color: white;
+    padding-top: 15px;
+    padding: 5px;
+}
+
+.sub-footer {
+    align-items: center;
+    text-align: center;
+}
+
+.icon-container {
+    color: white;
+
+}
+
+.heading-container-three {
+    font-weight: bolder;
+    padding-left: 35px;
+}
+
+@media screen and (min-width:500px) {
+    .div-container {
+            background-color: #fe9900;
+        background-size: cover;
+            // padding: 10px 10px 10px 10px;
+        
+        
+        }
+        
+        }
+        
+        .heading-container {
+            color: white;
+            font-family: sans-serif;
+            font-weight: bold;
+        
+            padding-left: 10px;
+        }
+        
+        .heading-2-container {
+            color: white;
+            font-family: sans-serif;
+            font-weight: bolder;
+        
+            padding-left: 10px;
+            font-size: 23px;
+        }
+        
+        .footer-heading {
+            color: black;
+            font-family: sans-serif;
+            font-weight: bolder;
+            font-size: 25px;
+            text-align: center;
+            padding-top: 10px;
+        }
+        
+        .image-2-conatiner {
+            align-items: center;
+            text-align: center;
+            height: 50%;
+        }
+        
+        .header-container {
+            height: 20%;
+            padding-left: 15px;
+            padding-top: 5px;
+        }
+
+
+ion-title {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 35px;
+    color: white;
+    background-color: #fe9900;
+    padding: 30px;
+
+}
+
+.para-container {
+    color: #fe9900;
+    font-style: italic;
+    font-size: 12px;
+}
+
+.btn-container {
+    color: white;
+}
+.button-container {
+    background-color: white;
+}
+
+.image-container {
+    height: 100%;
+}
+#container p {
+    font-size: 16px;
+    line-height: 22px;
+    color: #8c8c8c;
+    margin: 0;
+}
+
+#container a {
+    text-decoration: none;
+}
+
+.img {
+    margin-top: 50px;
+}
+.icon-container {
+    color: white;
+}
+
+.terms-container {
+    padding: 10px;
+}

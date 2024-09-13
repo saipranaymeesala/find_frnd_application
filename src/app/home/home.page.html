@@ -1,0 +1,167 @@
+<!-- header-content -->
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-item>
+      <ion-avatar slot="start">
+        <ion-img src="{{userData.avatar}}" alt="image" size="large"></ion-img>
+      </ion-avatar>
+      <ion-label slot="end">
+        <ion-icon name="notifications" size="large"></ion-icon>
+      </ion-label>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Message-content -->
+  <div class="div-container">
+    <ion-row>
+      <ion-col size-sm="6">
+        <ion-item color="warning">
+          <ion-icon name="warning" size="large"></ion-icon>
+          <h6>Don't share OTP & phone number</h6>
+        </ion-item>
+      </ion-col>
+      <ion-col size-sm="6">
+        <ion-item color="warning">
+          <ion-icon name="thumbs-down" size="large"></ion-icon>
+          <h6>Bad behaviour instant block</h6>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <!-- Recommended-container -->
+  <ion-list>
+    <ion-item>
+      <h3>Recommended for you</h3>
+    </ion-item>
+  </ion-list>
+  <ion-row>
+    <ion-col>
+      <ion-card class="recommended-card">
+        <ion-card-content>
+          <ion-img
+            src="https://toppng.com/public/uploads/preview/cool-avatar-transparent-image-cool-boy-avatar-11562893383qsirclznyw.png"
+            class="img-container"
+          ></ion-img>
+          <h2>Srinadh</h2>
+          <ion-icon name="call" size="medium" class="phone-icon"></ion-icon>
+          <ion-icon name="videocam" size="medium" class="video-icon"></ion-icon>
+          <ion-icon name="chatbox" size="medium" class="chat-icon"></ion-icon>
+          <br />
+          <ion-button>Follow</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card class="recommended-card">
+        <ion-card-content>
+          <ion-img
+            src="https://img.freepik.com/free-photo/androgynous-avatar-non-binary-queer-person_23-2151100226.jpg?t=st=1725437331~exp=1725440931~hmac=bbf8cdeb60a957af090a380f188924cf31b3e05a9690b91a8ad3a58be8f12c0b&w=740"
+            class="img-container"
+          ></ion-img>
+          <h2>Bhagavan</h2>
+          <ion-icon name="call" size="medium" class="phone-icon"></ion-icon>
+          <ion-icon name="videocam" size="medium" class="video-icon"></ion-icon>
+          <ion-icon name="chatbox" size="medium" class="chat-icon"></ion-icon>
+          <br />
+          <ion-button>Follow</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-card class="recommended-card">
+        <ion-card-content>
+          <ion-img
+            src="https://img.freepik.com/premium-photo/management-consultant-vector-flat-style-illustration_1033579-116628.jpg?w=740"
+            class="img-container"
+          ></ion-img>
+          <h2>Raju</h2>
+          <ion-icon name="call" size="medium" class="phone-icon"></ion-icon>
+          <ion-icon name="videocam" size="medium" class="video-icon"></ion-icon>
+          <ion-icon name="chatbox" size="medium" class="chat-icon"></ion-icon>
+          <br />
+          <ion-button>Follow</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card class="recommended-card">
+        <ion-card-content>
+          <ion-img
+            src="https://img.freepik.com/premium-photo/memoji-happy-man-white-background-emoji_826801-6833.jpg?w=740"
+            class="img-container"
+          ></ion-img>
+          <h2>Kiran</h2>
+          <ion-icon name="call" size="medium" class="phone-icon"></ion-icon>
+          <ion-icon name="videocam" size="medium" class="video-icon"></ion-icon>
+          <ion-icon name="chatbox" size="medium" class="chat-icon"></ion-icon>
+          <br />
+          <ion-button>Follow</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-list>
+    <ion-item>
+      <p slot="end">View all</p>
+      <ion-icon
+        name="chevron-forward-outline"
+        class="arrow-icon"
+        slot="end"
+      ></ion-icon>
+    </ion-item>
+  </ion-list>
+
+ <!-- All types of Rooms -->
+   <ion-list>
+    <ion-item>
+      <h3>All Types of Rooms</h3>
+    </ion-item>
+  </ion-list>
+  <ion-row>
+    <ion-col>
+      <ion-card class="room-card-one">
+        <ion-card-content>
+            <h1 class="rooms-content">Private Training Rooms</h1>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card class="room-card-two">
+        <ion-card-content>
+            <h1 class="rooms-content">Friends Making Rooms</h1>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-card class="room-card-three">
+        <ion-card-content>
+            <h1 class="rooms-content">Friend Groups & Rooms</h1>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card class="room-card-four">
+        <ion-card-content>
+            <h1 class="rooms-content">Friends  Making  Rooms</h1>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-list>
+    <ion-item>
+      <p slot="end">View all</p>
+      <ion-icon
+        name="chevron-forward-outline"
+        class="arrow-icon"
+        slot="end"
+      ></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

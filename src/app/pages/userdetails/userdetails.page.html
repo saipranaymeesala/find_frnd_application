@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>User Details<ion-icon name="male-female-outline"></ion-icon></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="img">
+    <ion-img src="../assets/userdetails/logo.webp" alt="logo">
+    </ion-img>
+  </div>
+  <div class="container">
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <ion-card color="white">
+          <ion-card-content>
+            <form [formGroup]="userDetails">
+              <ion-input type="text" formControlName="name" label="NickName" label-placement="floating" placeholder="Enter Nick-name" fill="outline">
+              </ion-input>
+              <ion-select justify="space-between" aria-label="Fruit" interface="action-sheet"
+                 label="Choose Gender" label-placement="floating" fill="outline" formControlName="gender" >
+                <ion-select-option value="male">Male</ion-select-option>
+                <ion-select-option value="female">Female</ion-select-option>
+              </ion-select>
+              <ion-input label="Date of birth" label-placement="floating" fill="outline" on-click="dateVisibility()"
+                [(ngModel)]="dateOfBirth" name="dateOfBirth" id="datePicker" formControlName="dateOfBirth" >
+              </ion-input>
+            </form>
+            <ion-button shape="round" fill="outline" color="light" [disabled]="false" class=""
+              (click)="submitDetails($event)">Submit</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>
+
+<!-- Date of birth selection -->
+<ion-modal trigger="datePicker" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+  <ng-template>
+    <div *ngIf="isShowDate; then showdate;"></div>
+    <ng-template #showdate>
+      <ion-datetime presentation="date" [preferWheel]="true" (ionChange)="changeOnDate($event)"></ion-datetime>
+    </ng-template>
+  </ng-template>
+</ion-modal>
+
+
+<!-- languages selections -->

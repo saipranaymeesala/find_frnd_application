@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Profile Details</ion-title>
+  </ion-toolbar>
+
+  <ion-content [fullscreen]="true">
+    <!-- Profile Image and Edit Button -->
+    <div class="profile-image-container">
+      <ion-avatar class="profile-avatar">
+        <img [src]="selectedImage || 'assets/default-profile.png'" alt="Profile Image" />
+        <ion-button class="edit-btn" fill="clear" (click)="selectImage()">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+      </ion-avatar>
+    </div>
+  
+    <!-- Nickname Input -->
+    <ion-item>
+      <ion-label position="floating">Nickname</ion-label>
+      <ion-input [(ngModel)]="nickname" placeholder="Enter your nickname"></ion-input>
+    </ion-item>
+  
+    <!-- Email Input -->
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input [(ngModel)]="email" placeholder="Enter your email" type="email"></ion-input>
+    </ion-item>
+  
+    <!-- Save Button -->
+    <ion-button expand="full" color="primary" (click)="saveProfile()">Save Profile</ion-button>
+  </ion-content>
+  
+

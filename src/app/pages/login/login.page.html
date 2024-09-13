@@ -1,0 +1,134 @@
+<ion-content [fullscreen]="true">
+  <div class="img">
+    <ion-img src="./assets/login/couple.webp" alt="couple image">
+    </ion-img>
+  </div>
+   
+  <div class="container">
+    <form [formGroup]="login">
+   
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-input
+            label="Email"
+            label-placement="floating"
+            fill="outline"
+            placeholder="Enter your email"
+            formControlName="email">
+          </ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+   
+    <div *ngFor="let err of errors">
+      <ng-container
+      *ngIf="login.get('email')?.hasError(err.type) && (login.get('email')?.touched)" >
+        <p style="color:red">{{err.message}}</p>
+      </ng-container>
+    </div>
+   
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-input
+          label="OTP validation"
+          label-placement="floating"
+          fill="outline"
+          placeholder="Enter your OTP"
+          inputmode="numeric"
+          formControlName="otp" >
+        </ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+   
+   
+  <div *ngFor="let err of errors">
+    <ng-container
+    *ngIf="login.get('otp')?.hasError(err.type) && (login.get('otp')?.touched)" >
+      <p style="color:red">{{err.message}}</p>
+    </ng-container>
+  </div>
+    </form>
+   
+   
+    <div *ngIf="resend; then showResend; else showTimer "> </div>
+  <ng-template #showResend>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="ion-text-end" >
+          <ion-button
+          id="resendBtn"
+          fill="outline"
+          color="light"
+          [disabled]="isdisableResend"
+          (click)="sendOTP()"
+          >
+          Resend OTP
+      </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-template>
+   
+  <ng-template #showTimer>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="ion-text-end" >
+          <ion-button
+          id="resendBtn"
+          fill="outline"
+          color="light"
+          [disabled]="isdisableResend"
+          (click)="sendOTP()"
+          >
+          {{timer}}
+      </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-template>
+   
+   
+  <div *ngIf="otpsent; then showSendBtn; else showVerifyBtn "> </div>
+  <ng-template #showSendBtn>
+   
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button
+        class="Button"
+        shape="round"
+        fill="outline"
+        color="light"
+        (click)="sendOTP()">Send OTP</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+   
+   
+   
+  </ng-template>
+   
+  <ng-template #showVerifyBtn>
+   
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button
+          class="Button"
+          shape="round"
+          fill="outline"
+          color="light"
+          (click)="verifyOTP()"
+          required>Verify OTP</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+   
+   
+  </ng-template>
+  </div>
+   
+  </ion-content>

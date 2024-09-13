@@ -1,0 +1,54 @@
+<ion-content>
+  <ion class="row">
+    <ion class="col size-sm-12 offset-sm-6">
+      <div class="div-container">
+        <div class="header-container">
+          <i class="fa-regular fa-heart fa-4x icon-container"></i>
+          <h1>
+            <span class="heading-container">Earphones on!</span> <br />
+            <span class="heading-2-container"
+              >No real pics, Only voice & Avatar</span
+            >
+          </h1>
+        </div>
+        <div class="image-2-conatiner">
+          <swiper-container
+            (slidechange)="swiperSlideChanged($event)"
+            [loop]="true"
+            [pagination]="true"
+          >
+            <swiper-slide *ngFor="let img of images">
+              <img [src]="img" class="image-container" alt="" />
+              <img alt="Silhouette of mountains" [src]="img.imagepath" />
+            </swiper-slide>
+          </swiper-container>
+        </div>
+        <div class="footer-container">
+          <div class="terms-container">
+            <h1 class="footer-heading">Make Real Frnd's 100% Safe Audio App</h1>
+            <ion-checkbox [(ngModel)]="isChecked" labelPlacement="end"
+              >By Proceeding I accept the <span></span
+            ></ion-checkbox>
+            <!-- <ion-checkbox labelPlacement="start">Label at the Start</ion-checkbox> -->
+            <h5 class="heading-container-three">
+              User Policy & Terms and Conditions
+            </h5>
+          </div>
+
+          <div class="sub-footer">
+            <ion-button
+              [disabled]="!isChecked"
+              color="warning"
+              shape="round"
+              fill="outline"
+              size="large"
+              (click)="moveloginPage()"
+              routerLink="/login"
+              ><ion-icon name="arrow-forward-outline"></ion-icon
+            ></ion-button>
+          </div>
+        </div>
+      </div>
+    </ion>
+  </ion>
+</ion-content>

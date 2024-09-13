@@ -1,0 +1,36 @@
+<ion-content [fullscreen]="true">
+  <ion-header style="background: #fe9900;" [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/avatars"></ion-back-button>
+      </ion-buttons>
+      <ion-title>ProfileCompletion</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="container">
+    <div class="img-container">
+      <ion-img src={{userData.avatar}} alt="image"></ion-img>
+    </div>
+
+    <div class="text-secondary">Hii {{userData.name}} 👋</div>
+
+    <div class="text-primary">
+      Your profile was generated successfully
+    </div>
+
+    <div class="img-container">
+      <img src="../assets/profile/checkmark.webp" alt="">
+    </div>
+
+    <ion-button color="warning" shape="round" fill="outline" expand="full" routerLink="/home" >Get Started</ion-button>
+  </div>
+</ion-content>
+
+
+
+
+
+
+
+

@@ -1,0 +1,44 @@
+:host {
+    --background: #fe9900;
+}
+
+ion-content {
+    --background: #fe9900;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+ion-header, ion-toolbar, ion-title {
+    --background: #fe9900;
+    color: white;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+ion-img {
+    height: 200px;
+    width: 220px;
+    border-radius: 50%;
+}
+
+.text-secondary, .text-primary {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: larger;
+    margin: 10px 0;
+}
+
+img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 20px 0;
+}
