@@ -1,75 +1,27 @@
-ion-content {
-    --background: linear-gradient(#fcab0a, #fe9900, #ffffff);
-      height: 100%;
-      background-size: cover;
-    }
-  
-  ion-button {
-    width: 95%;
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-  .block {
-    width: 100%;
-    height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  ion-modal {
-    --height: auto;
-  }
-  
-  ion-input {
-    width: 95%;
-    margin: 14px;
-    color: white;
-  
-  }
-  
-  ion-img {
-    width: 200px;
-    text-align: center;
-  }
-  
-  .img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  
-  .radio {
-    margin: 20px;
-  }
-  
-  ion-label {
-    margin: 10px;
-  }
-  ion-radio {
-    padding: 15px;
-  }
-  
-  .sc-ion-input-md-h {
-    --border-style: solid;
-    --highlight-color-focused: #ffffff;
-    --highlight-color-valid: #ffffff;
-    --highlight-color-invalid: #ffffff;
-    --highlight-color: #ffffff;
-  }
-  
-  ion-select {
-    --background: #fe9900;
-    --background-rgb: var(--background);
-    
-      color: white;
-      padding-left: 12px;
-    }
-    ion-toolbar{
-      color: white;
-    }
-  
-  // ion-select-option{
-  //   --background: #fe9900;
-  // }
+
+
+ion-img{
+  width:200px;
+}
+
+.modal {
+  width:100%;
+  height:150px;
+  margin:20px;
+}
+.calendar{
+  margin:0px;
+  height:200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ion-modal {
+  --height: auto;
+  --ion-background-color: #ffffff;
+}
+
+ion-radio{
+  margin:10px;
+}

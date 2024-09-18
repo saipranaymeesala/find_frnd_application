@@ -3,7 +3,9 @@
   <ion-toolbar>
     <ion-item>
       <ion-avatar slot="start">
-        <ion-img src="{{userData.avatar}}" alt="image" size="large"></ion-img>
+        <!-- <ion-router-link routerLink="/profiledetails"></ion-router-link> -->
+        <ion-img src="{{userData.avatar}}" alt="image" (click)="profileDetails()" size="large"></ion-img>
+      
       </ion-avatar>
       <ion-label slot="end">
         <ion-icon name="notifications" size="large"></ion-icon>

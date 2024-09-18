@@ -26,4 +26,22 @@
     border-radius: 50%;
     padding: 5px;
   }
-  
+
+
+  ion-card{
+    ion-item{
+      --background:#f5dcb675;
+      margin-top:10px;
+    }
+    --background:#f5dcb675;
+   border-radius: 20px;;
+   margin:20px;
+   margin-top:70px;
+  }
+
+  .alert,alert-wrapper{
+    --background:#f5dcb675;
+  }
+  ion-alert.your-custom-class {
+    --background: #fffeff;
+  }

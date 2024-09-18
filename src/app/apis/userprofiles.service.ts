@@ -10,11 +10,13 @@ export class UserprofilesService {
   constructor(private http: HttpClient) { }
 
   public sendUserDetails(
-    profile: string,
-    nickname: string,
-    gender: string,
-    dateofbirth: string): Observable<HttpResponse<any>> {
-    return this.http.post(`${URL} + 'sendUserDetails`, { profile, nickname, gender, dateofbirth }, { observe: 'response' })
+    profile: any): Observable<any> {
+    return this.http.post(`${URL} + 'sendUserDetails`, {
+      profile: profile,
+      nickname: profile.nickname,
+      gender: profile.nickname,
+      dateofbirth: profile.dateofbirth
+    })
   }
 
 }
