@@ -14,8 +14,9 @@ export class ProfiledetailsPage {
     throw new Error('Method not implemented.');
   }
   selectedImage: string | null = null
-  nickname: string = '';
-  email: string = '';
+  public nickname: string = '';
+  public email: string = '';
+  public userData: any = '';
 
   constructor(
     private platform: Platform,
@@ -26,6 +27,8 @@ export class ProfiledetailsPage {
 
   ngOnInit() {
     console.log('profiledetailspage initialized');
+    this.userData = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('userData'))))
+    console.log(this.userData);
   }
 
   // Method to handle image selection from the device
@@ -94,15 +97,21 @@ export class ProfiledetailsPage {
                   this.router.navigate(['/introduction']);
                 }
               }],
-              cssClass: 'alert',
-            }).then((alert) => alert.present());
+            }).then((alert) => {
+              alert.style.backgroundColor = 'white',
+                alert.style.background = 'green',
+                alert.present()
+            });
 
           }, 1500)
 
         }
       }],
-      cssClass: 'ionalert'
-    }).then((alert) => alert.present());
+    }).then((alert) => {
+      alert.style.background = 'red',
+        alert.style.backgroundColor = 'white',
+        alert.present()
+    });
   }
 
 }

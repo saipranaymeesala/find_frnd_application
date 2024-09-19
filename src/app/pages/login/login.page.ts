@@ -126,6 +126,12 @@ export class LoginPage implements OnInit {
       console.log("invalid otp");
     }
 
+
+
+
+  }
+  public nextPage() {
+    this.router.navigate(['/userdetails']);
   }
 
   // --------------------------------------------------------------

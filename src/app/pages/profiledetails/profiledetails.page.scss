@@ -131,3 +131,14 @@
     --backgroud-color:pink;
     border-radius: 4px;
   }
+
+
+  .delete-alert {
+    --background: #f8d7da !important; /* Background color for delete confirmation */
+    --color: #721c24 !important;      /* Text color for delete confirmation */
+  }
+  
+  .success-alert {
+    --background: #d4edda !important; /* Background color for success alert */
+    --color: #155724 !important;      /* Text color for success alert */
+  }
