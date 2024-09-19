@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { AlertController, Platform } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController, Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-profiledetails',
@@ -17,7 +17,13 @@ export class ProfiledetailsPage {
   nickname: string = '';
   email: string = '';
 
-  constructor(private platform: Platform, private router: Router, private alert: AlertController) { }
+  constructor(
+    private platform: Platform,
+    private router: Router,
+    private alert: AlertController,
+    private loadingCtrl: LoadingController,
+    private modalCtrl: ModalController) { }
+
   ngOnInit() {
     console.log('profiledetailspage initialized');
   }
@@ -74,19 +80,28 @@ export class ProfiledetailsPage {
       {
         text: 'delete',
         handler: () => {
-          this.alert.create({
-            message: 'Your account deleted successfully',
-            buttons: [{
-              text: 'Okay',
-              handler: () => {
-                this.router.navigate(['/introduction']);
-              }
-            }],
-            cssClass: 'alert',
-          }).then((alert) => alert.present());
+          this.loadingCtrl.create(
+            {
+              keyboardClose: true, message: ' Deleting ...'
+            }).then((deleting) => deleting.present());
+          setTimeout(() => {
+            this.loadingCtrl.dismiss();
+            this.alert.create({
+              message: 'Your account deleted successfully',
+              buttons: [{
+                text: ' Okay',
+                handler: () => {
+                  this.router.navigate(['/introduction']);
+                }
+              }],
+              cssClass: 'alert',
+            }).then((alert) => alert.present());
+
+          }, 1500)
+
         }
       }],
-      cssClass: 'alert'
+      cssClass: 'ionalert'
     }).then((alert) => alert.present());
   }
 

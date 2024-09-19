@@ -115,7 +115,6 @@ export class LoginPage implements OnInit {
             }).then((verifying) => verifying.present());
           setTimeout(() => {
             this.loadingCtrl.dismiss();
-            console.log("verified Successfully");  // otp verification
             // this.router.navigate(['/userdetails']);
           }, 1500)
         }
