@@ -1,21 +1,20 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>userdetails</ion-title>
+    <ion-title color="light">userdetails</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
 
+<form [formGroup]="userDetails">
+
   <ion-grid>
     <ion-row>
-      <ion-col size="6" offset="2">
+      <ion-col size="6" offset="3">
         <ion-img src=".\assets\userdetails\logo.webp" alt="image"></ion-img>
       </ion-col>
     </ion-row>
-  </ion-grid>
   
-<form [formGroup]="userDetails">
-  <ion-grid>
     <ion-row>
       <ion-col>
         <ion-input 
@@ -27,9 +26,7 @@
         </ion-input>
       </ion-col>
     </ion-row>
-  </ion-grid>
 
-  <ion-grid>
     <ion-row>
       <ion-col>
         <ion-input 
@@ -63,14 +60,17 @@
             </div>
           </ng-template>
           </ion-modal>
-          <ion-backdrop part="backdrop" tabindex="-1" inert>
-          </ion-backdrop>
+          <!-- <ion-backdrop part="backdrop" tabindex="-1" inert>
+          </ion-backdrop> -->
+
+          <ion-backdrop part="backdrop" tabindex="-1" inert class="md hydrated" style="pointer-events: auto;"></ion-backdrop>
+
+
+
         </ion-input>
       </ion-col>
     </ion-row>
-  </ion-grid>
-
-  <ion-grid>
+ 
     <ion-row>
       <ion-col>
         
@@ -85,7 +85,7 @@
         </ion-input>
       </ion-col>
     </ion-row>
-  </ion-grid>
+ 
     <ion-modal  
     trigger="open-modal1"
     [initialBreakpoint]="1"
@@ -101,10 +101,11 @@
   </div>
     </ng-template>
     </ion-modal>
-    <ion-backdrop part="backdrop" tabindex="-1" inert>
-    </ion-backdrop>
+    <!-- <ion-backdrop part="backdrop" tabindex="-1" inert>
+    </ion-backdrop> -->
 
-    <ion-grid>
+    <ion-backdrop part="backdrop" tabindex="-1" inert class="md hydrated" style="pointer-events: auto;"></ion-backdrop>
+
       <ion-row>
         <ion-col>
           <ion-button

@@ -22,6 +22,23 @@ ion-modal {
   --ion-background-color: #ffffff;
 }
 
+ion-picker.hydrated{
+  --ion-background-color: #ffffff;
+  --background: rgb(255, 255, 255);
+}
+
 ion-radio{
   margin:10px;
+}
+
+ion-input{
+  color:white;
+}
+
+ion-grid{
+  ion-row{
+    ion-col{
+      margin:10px;
+    }
+  }
 }

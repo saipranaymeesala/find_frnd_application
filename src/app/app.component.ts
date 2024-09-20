@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { PrivacyScreen } from '@capacitor-community/privacy-screen';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,16 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor() {
+    this.enablePrivacyScreen();
+  }
+
+  async enablePrivacyScreen() {
+    try {
+      await PrivacyScreen.enable();
+      console.log('Privacy screen enabled successfully.');
+    } catch (error) {
+      console.error('Failed to enable privacy screen:', error);
+    }
+  }
 }

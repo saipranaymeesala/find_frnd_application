@@ -37,9 +37,9 @@ export class UserdetailsPage implements OnInit {
   public submit() {
 
     let userDataObj = {
-      name: this.userDetails.get('nickname')!.value,
       gender: this.userDetails.get('gender')!.value,
-      dob: this.userDetails.get('dateofbirth')!.value
+      // name: this.userDetails.get('nickname')!.value,
+      // dob: this.userDetails.get('dateofbirth')!.value
     }
     localStorage.setItem('userData', JSON.stringify(userDataObj))
     this.router.navigate(['/avatars'])
