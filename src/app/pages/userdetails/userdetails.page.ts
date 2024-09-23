@@ -33,23 +33,28 @@ export class UserdetailsPage implements OnInit {
     this.storeDateValue = event.detail.value;
     this.dateofbirth = this.storeDateValue.slice(0, 10);
   }
-
+  public email = localStorage.getItem('userEmail');
   public submit() {
 
     let userDataObj = {
+      email: this.email,
       gender: this.userDetails.get('gender')!.value,
-      // name: this.userDetails.get('nickname')!.value,
-      // dob: this.userDetails.get('dateofbirth')!.value
+      name: this.userDetails.get('nickname')!.value,
+      dob: this.userDetails.get('dateofbirth')!.value
     }
-    localStorage.setItem('userData', JSON.stringify(userDataObj))
-    this.router.navigate(['/avatars'])
+    localStorage.setItem('userData', JSON.stringify(userDataObj)),
+      localStorage.setItem('userEmail', JSON.stringify(userDataObj)),
+      this.router.navigate(['/avatars'])
 
-    this.service.sendUserDetails(userDataObj).subscribe((Response) => {
-      console.log(Response);
+    this.service.sendUserDetails(userDataObj).subscribe((data) => {
+
+      console.log(data)
     })
 
   }
 
 
-  ngOnInit() { }
+  ngOnInit() {
+    console.log(this.email)
+  }
 }

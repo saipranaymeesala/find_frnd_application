@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 import { LoadingController } from '@ionic/angular';
 import { LoginService } from 'src/app/apis/login.service';
-import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-login',
@@ -12,11 +12,15 @@ import { Observable } from 'rxjs';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  // private OTP: any;
+  public isVisibleEmailInput: boolean = true;
   public resend: boolean = true;
   public timer: number = 59;
   public isdisableResend: boolean = true;
   public otpsent: boolean = true;
   public userOTP: string = '';
+  public otpValidation: boolean = true;
+  public interval: any;
 
   constructor(private router: Router, private service: LoginService, private loadingCtrl: LoadingController) { }
 
@@ -25,7 +29,8 @@ export class LoginPage implements OnInit {
     { type: 'email', message: 'Please enter valid email' },
     { type: 'minlength', message: 'Characters must be 4' },
     { type: 'maxlength', message: 'Characters must be 4' },
-    { type: 'emailValidation', message: 'Invalid email' }
+    { type: 'emailValidation', message: 'Invalid email' },
+    { type: 'otpValidation', message: 'Invalid OTP' }
   ]
 
   login = new FormGroup({
@@ -47,42 +52,52 @@ export class LoginPage implements OnInit {
   // }
 
 
-  public sendOTP(): void {
-    const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-    console.log("User data : " + userData);
 
-    const storedOtp = localStorage.getItem('otp');
-    console.log("User storedOtp : " + storedOtp);
-
-
-    let userDataEmail = {
-      email: this.login.get('email')!.value,
-      otp: this.login.get('otp')!.value,
-    }
-
-    localStorage.setItem('userData', JSON.stringify(userDataEmail));
+  public async sendOTP() {
 
     const emailValid: boolean = this.login.controls.email.valid;
     if (emailValid) {
-      const email = this.login.controls.email.value;
-      this.service.sendOTP(email).subscribe((Response: HttpResponse<any>) => {
-        const response: number = Response.status;
-        if (response === 200) {
-          this.otpsent = false;
-          this.resend = false;
-          this.timer = 59;
-          this.isdisableResend = true;
-          const interval = setInterval(() => {
-            if ((--this.timer) === 0) {
-              this.resend = true;
-              this.isdisableResend = false;
-              clearInterval(interval);
-            }
-          }, 1000)
-        }
-      },
-        err => { }
-      );
+      const email: any = this.login.controls.email.value;
+
+      this.loadingCtrl.create({
+        keyboardClose: true,
+        message: 'Sending Otp...'
+      }).then((sending) => sending.present());
+      setTimeout(() => {
+
+        this.service.sendOTP(email).subscribe(async (response: HttpResponse<any>) => {
+          this.loadingCtrl.dismiss();
+          const status: number = response.status;
+          const OTP = response.body.code;
+          const cache = await caches.open('my-cache'); // Ensure this is awaited
+          await cache.put(`http://localhost:9090/api/sendOtp?email=${email}`, new Response(JSON.stringify({ OTP }), {
+            headers: { 'Content-Type': 'application/json' }
+          }));
+
+          console.log("send otp code", OTP) // console
+          if (status === 200) {
+
+            this.isVisibleEmailInput = false;
+            this.otpsent = false;
+            this.resend = false;
+            this.timer = 59;
+            this.isdisableResend = true;
+
+            this.interval = setInterval(() => {
+              if ((--this.timer) === 0) {
+                this.resend = true;
+                this.isdisableResend = false;
+                clearInterval(this.interval);
+              }
+            }, 1000)
+          }
+          localStorage.setItem('userEmail', email)
+        },
+          err => { }
+        );
+      }, 3500)
+
+
     }
     else {
       console.log("invalid email id");
@@ -91,110 +106,38 @@ export class LoginPage implements OnInit {
 
   public verifyOTP(): any {
 
-    // let userDataOTP = {
-    //   email: this.login.get('email')!.value,
-    //   otp: this.login.get('otp')!.value,
-    // }
-    // localStorage.setItem('userData', JSON.stringify(userDataOTP))
-
-    const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-    console.log("userData in verify : " + userData);
-
     const otpValid: boolean = this.login.controls.otp.valid;
     if (otpValid) {
       const otp: any = this.login.controls.otp.value;
-      console.log("user entered otp : " + otp); // user entered otp
       this.service.verifyOTP(otp).subscribe((Response: HttpResponse<any>) => {
         const response: number = Response.status;
-        console.log("response from http : " + response); // response
+
         if (response === 200) {
-          console.log("passed if condition of verifyOtp"); // passed if conditon;
           this.loadingCtrl.create(
             {
               keyboardClose: true, message: ' Verifying ...'
             }).then((verifying) => verifying.present());
           setTimeout(() => {
+            this.timer = 2;
+            this.isVisibleEmailInput = true;
+            this.otpsent = true;
+            this.login.reset();
             this.loadingCtrl.dismiss();
-            // this.router.navigate(['/userdetails']);
+            this.router.navigate(['/userdetails']);
           }, 1500)
         }
       },
-        err => { }
+        err => { console.log("error occured"); }
       );
     }
     else {
       console.log("invalid otp");
     }
-
-
-
-
   }
   public nextPage() {
     this.router.navigate(['/userdetails']);
   }
-
-  // --------------------------------------------------------------
-
-  // public generateOTP(): any {
-  //   let OTP = "";
-  //   try {
-  //     let OTPArray = "1234567890";
-  //     let number;
-  //     for (var i = 0; i < 4; i++) {
-  //       number = Math.floor(Math.random() * OTPArray.length)
-  //       OTP = OTP + OTPArray[number];
-  //     }
-  //   }
-  //   catch (err: any) {
-  //     console.log(err.message)
-  //     OTP = "1234";
-
-  //   }
-  //   return Number(OTP);
-  // }
-  // public sendOTP(): void {
-  //   let userDat = {
-  //     email: this.login.get('email')!.value,
-  //     otp: this.login.get('otp')!.value,
-  //   }
-  //   localStorage.setItem('userData', JSON.stringify(userDat))
-
-  //   const emailValid: boolean = this.login.controls.email.valid;
-  //   if (emailValid) {
-  //     const email = this.login.controls.email.value;
-  //     this.service.sendOTP(email).subscribe((Response: HttpResponse<any>) => {
-  //       const response: number = Response.status;
-  //       if (response === 200) {
-  //         this.otpsent = false;
-  //         this.resend = false;
-  //         this.timer = 59;
-  //         this.isdisableResend = true;
-  //         const interval = setInterval(() => {
-  //           if ((--this.timer) === 0) {
-  //             this.resend = true;
-  //             this.isdisableResend = false;
-  //             clearInterval(interval);
-  //           }
-  //         }, 1000)
-  //       }
-  //     },
-  //       err => { }
-  //     );
-  //   }
-  //   else {
-  //     console.log("invalid email id");
-  //   }
-  // }
-  // public verifyOTP(): void {
-  // }
-
-  // --------------------------------------------------------------
-
-
-
   ngOnInit() {
-    // console.log(this.generateOTP())
   }
 
 }

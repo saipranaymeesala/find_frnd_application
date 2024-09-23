@@ -1,144 +1,39 @@
 .profile-image-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  .profile-avatar {
-    position: relative;
-    width: 150px;
-    height: 150px;
-  }
-  
-  .profile-avatar img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-  }
-  
-  .edit-btn {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.007);
-    color: white;
-    border-radius: 50%;
-    padding: 5px;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
 
+.profile-avatar {
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
 
-  ion-card{
-    ion-item{
-      --background:#f5dcb675;
-      margin-top:10px;
-    }
-    --background:#f5dcb675;
-   border-radius: 20px;;
-   margin:20px;
-   margin-top:70px;
-  }
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
 
-  ion-alert.ionalert {
-    --background: white;
-  }
+.edit-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.007);
+  color: white;
+  border-radius: 50%;
+  padding: 5px;
+}
 
-  .alert .alert-wrapper{
-    --background:#f5dcb675 !important;
-    background:#f5dcb675 !important ;
-    width: 200px;;
+ion-card {
+  ion-item {
+    --background: #f5dcb675;
+    margin-top: 10px;
   }
-  .ionalert alert-wrapper{
-    --background: #fffeff;
-    width: 300px;
-  }
-  .ionalert{
-    --background:white;
-    --background-color:white;
-    --width:200px;
-  }
-  .ionalert .alert-wrapper{
-    --background:black;
-    --width:100px;
-    --backgroud-color:pink;
-    background-color: red;
-  }
-
-  .alert-head {
-    --background:white;
-    --backgroud-color:pink;
-    background-color: red;
-  }
-  .ionalert .alert-wrapper{
-    --background:black;
-    --backgroud-color:pink;
-    background-color: red;
-  }
-  .alert-button-group{
-    --background:yellow;
-    --backgroud-color:pink;
-    background-color: red;
-  }
-
-  ion-alert{
-    --background:white;
-    --backgroud-color:pink;
-    background-color: red;
-  }
-  .alert-wrapper ion-overlay-wrapper sc-ion-alert-md{
-    background-color: #fffeff;
-    --background:yellow;
-    --backgroud-color:pink;
-  }
-
-  .alert-head sc-ion-alert-md{
-    background-color: #fffeff;
-    --background:yellow;
-    --backgroud-color:pink;
-  }
-  .alert-button-group sc-ion-alert-md{
-    background-color: #fffeff;
-    --background:yellow;
-    --backgroud-color:pink;
-  }
-
-
-  ion-alert.custom-alert {
-    --backdrop-opacity: 0.7;
-    background-color: #fffeff;
-    --background:yellow;
-    --backgroud-color:pink;
-  }
-  
-  .custom-alert .alert-button-group {
-    padding: 8px;
-    background-color: #fffeff;
-    --background:yellow;
-    --backgroud-color:pink;
-  }
-  
-  button.alert-button {
-    background-color: var(--ion-color-success);
-    color: var(--ion-color-success-contrast);
-    background-color: #fffeff;
-    --background:yellow;
-    --backgroud-color:pink;
-  }
-  
-  .md button.alert-button {
-    background-color: #fffeff;
-    --background:yellow;
-    --backgroud-color:pink;
-    border-radius: 4px;
-  }
-
-
-  .delete-alert {
-    --background: #f8d7da !important; /* Background color for delete confirmation */
-    --color: #721c24 !important;      /* Text color for delete confirmation */
-  }
-  
-  .success-alert {
-    --background: #d4edda !important; /* Background color for success alert */
-    --color: #155724 !important;      /* Text color for success alert */
-  }
+  --background: #f5dcb675;
+  border-radius: 20px;
+  margin: 20px;
+  margin-top: 70px;
+}

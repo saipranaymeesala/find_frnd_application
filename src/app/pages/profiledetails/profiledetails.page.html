@@ -18,7 +18,35 @@ profile
   <ion-card-content>
  <!-- Profile Image and Edit Button -->
  <div class="profile-image-container">
+<div *ngIf="changeImage; then defaultAvatar; else userImage "> </div>
+
+<ng-template #defaultAvatar>
   <ion-avatar class="profile-avatar">
+    <ion-img src="{{userData.avatar}}" alt="image" size="large"></ion-img>
+    <ion-button 
+    class="edit-btn" 
+    fill="clear" 
+    (click)="selectImage()">
+      <ion-icon name="create-outline"></ion-icon>
+    </ion-button>
+  </ion-avatar>
+</ng-template>
+
+<ng-template #userImage>
+
+  <ion-avatar class="profile-avatar">
+    <ion-img [src]="selectedImage" alt="profile pic" size="large">
+    </ion-img>
+    <ion-button 
+    class="edit-btn" 
+    fill="clear" 
+    (click)="selectImage()">
+      <ion-icon name="create-outline"></ion-icon>
+    </ion-button>
+  </ion-avatar>
+</ng-template>
+
+  <!-- <ion-avatar class="profile-avatar">
     <ion-img src="{{userData.avatar}}" alt="image" size="large"></ion-img>
     <ion-img [src]="selectedImage || 'assets/default-profile.png'">
     </ion-img>
@@ -28,7 +56,7 @@ profile
     (click)="selectImage()">
       <ion-icon name="create-outline"></ion-icon>
     </ion-button>
-  </ion-avatar>
+  </ion-avatar> -->
 </div>
 
 <ion-item>

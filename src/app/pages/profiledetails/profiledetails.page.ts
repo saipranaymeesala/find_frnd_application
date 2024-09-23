@@ -17,6 +17,7 @@ export class ProfiledetailsPage {
   public nickname: string = '';
   public email: string = '';
   public userData: any = '';
+  public changeImage: boolean = true;
 
   constructor(
     private platform: Platform,
@@ -59,7 +60,9 @@ export class ProfiledetailsPage {
       const file = event.target.files[0];
       const reader = new FileReader();
       reader.onload = (e: any) => {
+        this.changeImage = false;
         this.selectedImage = e.target.result;
+
 
       };
       reader.readAsDataURL(file);
@@ -91,25 +94,17 @@ export class ProfiledetailsPage {
             this.loadingCtrl.dismiss();
             this.alert.create({
               message: 'Your account deleted successfully',
-              buttons: [{
-                text: ' Okay',
-                handler: () => {
-                  this.router.navigate(['/introduction']);
-                }
-              }],
             }).then((alert) => {
-              alert.style.backgroundColor = 'white',
-                alert.style.background = 'green',
+              alert.style.background = 'white',
                 alert.present()
+              this.router.navigate(['/introduction']);
             });
-
           }, 1500)
 
         }
       }],
     }).then((alert) => {
-      alert.style.background = 'red',
-        alert.style.backgroundColor = 'white',
+      alert.style.background = 'white',
         alert.present()
     });
   }
