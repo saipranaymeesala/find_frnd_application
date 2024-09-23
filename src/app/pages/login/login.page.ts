@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
   public isdisableResend: boolean = true;
   public otpsent: boolean = true;
   public userOTP: string = '';
-  public otpValidation: boolean = true;
+  public otpValidation: boolean = false;
   public interval: any;
 
   constructor(private router: Router, private service: LoginService, private loadingCtrl: LoadingController) { }
@@ -27,31 +27,25 @@ export class LoginPage implements OnInit {
   errors = [
     { type: 'required', message: 'Field cannot be empty' },
     { type: 'email', message: 'Please enter valid email' },
-    { type: 'minlength', message: 'Characters must be 4' },
-    { type: 'maxlength', message: 'Characters must be 4' },
-    { type: 'emailValidation', message: 'Invalid email' },
-    { type: 'otpValidation', message: 'Invalid OTP' }
+    { type: 'emailValidation', message: 'Invalid email' }
   ]
 
   login = new FormGroup({
-    email: new FormControl('', [Validators.required]),
-    otp: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(4)])
+    email: new FormControl('', [Validators.required, this.emailValidation]),
+    otp: new FormControl('', [Validators.required])
   })
 
-  // public emailValidation(event: any): any {
-  //   const userEmail = event.value;
-  //   console.log(userEmail);
-  //   const emailPattern: any = "^[A-Za-z0-9]+\\@+[a-z]{4}+\\.[a-z]{3}$";
-  //   if (emailPattern.test(userEmail)) {
-  //     return { 'emailpattern': true };
-  //   }
-  //   else {
-  //     return { 'emailpattern': false };
-  //   }
-  //   return true;
-  // }
-
-
+  public emailValidation(event: any): any {
+    const userEmail = event.value;
+    const emailPattern: any = /^[A-Za-z0-9._@#$%&*+-]+@gmail\.com$/;
+    const test = emailPattern.test(userEmail);
+    if (test) {
+      return null;
+    }
+    else {
+      return { 'emailpattern': true };
+    }
+  }
 
   public async sendOTP() {
 
@@ -120,6 +114,7 @@ export class LoginPage implements OnInit {
           setTimeout(() => {
             this.timer = 2;
             this.isVisibleEmailInput = true;
+            this.otpValidation = false;
             this.otpsent = true;
             this.login.reset();
             this.loadingCtrl.dismiss();
@@ -127,7 +122,9 @@ export class LoginPage implements OnInit {
           }, 1500)
         }
       },
-        err => { console.log("error occured"); }
+        err => {
+          this.otpValidation = true;
+        }
       );
     }
     else {

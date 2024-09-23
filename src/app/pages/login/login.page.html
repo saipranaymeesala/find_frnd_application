@@ -68,6 +68,20 @@
    </ion-grid>
   </ng-container>
 </div>
+<div *ngIf="otpValidation; then showError; else hideError"></div>
+<ng-template #showError>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <ion-label color="danger">OTP Do Not Match</ion-label>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ng-template>
+<ng-template #hideError>
+</ng-template>
+
+
   </form>
  
   <div *ngIf="resend; then showResend; else showTimer "> </div>
