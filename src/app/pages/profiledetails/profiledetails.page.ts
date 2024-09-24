@@ -96,8 +96,8 @@ export class ProfiledetailsPage {
               message: 'Your account deleted successfully',
             }).then((alert) => {
               alert.style.background = 'white',
-                alert.present()
-              this.router.navigate(['/introduction']);
+                this.router.navigate(['/introduction']);
+              alert.present()
             });
           }, 1500)
 

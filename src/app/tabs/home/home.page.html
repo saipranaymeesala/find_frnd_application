@@ -12,8 +12,12 @@
         ></ion-img>
       </ion-avatar>
       <ion-label slot="end">
-        <ion-icon name="notifications" size="large"></ion-icon>
+        <ion-tab-button routerLink="/notifications">
+          <ion-icon  name="notifications" size="large"></ion-icon>
+          <ion-badge >{{notificationCount}}</ion-badge>
+        </ion-tab-button>
       </ion-label>
+      
     </ion-item>
   </ion-toolbar>
 </ion-header>

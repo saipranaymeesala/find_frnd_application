@@ -17,6 +17,7 @@ export class LoginPage implements OnInit {
   public resend: boolean = true;
   public timer: number = 59;
   public isdisableResend: boolean = true;
+
   public otpsent: boolean = true;
   public userOTP: string = '';
   public otpValidation: boolean = false;
@@ -63,14 +64,13 @@ export class LoginPage implements OnInit {
           this.loadingCtrl.dismiss();
           const status: number = response.status;
           const OTP = response.body.code;
-          const cache = await caches.open('my-cache'); // Ensure this is awaited
-          await cache.put(`http://localhost:9090/api/sendOtp?email=${email}`, new Response(JSON.stringify({ OTP }), {
-            headers: { 'Content-Type': 'application/json' }
-          }));
+
+          const cache = await caches.open('my-cache');
+          await cache.put(`http://localhost:9090/api/sendOtp?email=${email}`, new Response(JSON.stringify({ OTP }),
+            { headers: { 'Content-Type': 'application/json' } }));
 
           console.log("send otp code", OTP) // console
           if (status === 200) {
-
             this.isVisibleEmailInput = false;
             this.otpsent = false;
             this.resend = false;
@@ -89,9 +89,7 @@ export class LoginPage implements OnInit {
         },
           err => { }
         );
-      }, 3500)
-
-
+      }, 3300)
     }
     else {
       console.log("invalid email id");

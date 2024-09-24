@@ -9,13 +9,18 @@ import { Router } from '@angular/router';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-
+  public notificationCount: number = 15;
   userData: any;
   constructor(private router: Router) { }
+
+  public notification(): void {
+    this.notificationCount++;
+  }
 
   public profileDetails() {
     this.router.navigate(['/profiledetails']);
   }
+
 
   ngOnInit() {
     this.userData = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('userData'))))

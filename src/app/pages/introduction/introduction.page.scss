@@ -5,13 +5,17 @@
     justify-content: center;
 }
 
-.div-container {
-    background: linear-gradient(#fe9900, #ffff);
-    background-size: cover;
-    // padding: 10px 10px 10px 10px;
-    
-
+ion-content{
+    --background: linear-gradient(#fe9900, #ffff);
+    background-size: cover;  
 }
+
+// .div-container {
+//     background: linear-gradient(#fe9900, #ffff);
+//     background-size: cover;
+//     // padding: 10px 10px 10px 10px;
+// }
+
 .footer-container {
     height: 30%;
     border-top-left-radius: 20%;

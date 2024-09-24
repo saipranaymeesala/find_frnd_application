@@ -2,31 +2,32 @@
   <ion-toolbar color="light">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs"></ion-back-button>
-    <ion-button>
-      <ion-avatar>
-        <ion-img src={{userData.avatar}} alt="image"></ion-img>
-      </ion-avatar>
-    </ion-button>
-      <!-- <ion-title>Ms.Queen</ion-title> -->
+      <ion-button>
+        <ion-avatar>
+          <ion-img [src]="userData.avatar" alt="image"></ion-img>
+        </ion-avatar>
+      </ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-button>
-        <ion-icon  name="call-outline" size="large"></ion-icon>
+        <ion-icon name="call-outline" size="large"></ion-icon>
       </ion-button>
-        <ion-button>
-          <ion-icon  name="videocam-outline" size="large"></ion-icon>
-        </ion-button>
-        <ion-button>
-          <ion-icon name="ellipsis-vertical-outline" size="large"></ion-icon>
-        </ion-button>
+      <ion-button>
+        <ion-icon name="videocam-outline" size="large"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon name="ellipsis-vertical-outline" size="large"></ion-icon>
+      </ion-button>
     </ion-buttons>
- 
   </ion-toolbar>
 </ion-header>
  
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" (ionScroll)="onScroll($event)" #content>
+  <ion-infinite-scroll threshold="100px" position="top" (ionInfinite)="loadOlderMessages($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more messages..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+ 
   <div class="chat-container">
-    <!-- Chat Messages -->
     <div *ngFor="let message of messages">
       <div [ngClass]="{'user-message': message.sender === 'user', 'bot-message': message.sender === 'bot'}">
         <p>{{ message.text }}</p>
@@ -34,14 +35,14 @@
     </div>
   </div>
 </ion-content>
-  <!-- Input Field and Send Button -->
-  <ion-footer>
-    <ion-toolbar>
-      <ion-item class="message-container">
-        <ion-input [(ngModel)]="newMessage" placeholder="Type your message..."></ion-input>
-        <ion-button class="icon" (click)="sendMessage()" color="primary" fill="solid">
-          <ion-icon name="send"></ion-icon>
-        </ion-button>
-      </ion-item>
-    </ion-toolbar>
-  </ion-footer>
+ 
+<ion-footer>
+  <ion-toolbar>
+    <ion-item class="message-container">
+      <ion-input [(ngModel)]="newMessage" placeholder="Type your message..."></ion-input>
+      <ion-button class="icon" (click)="sendMessage()" fill="solid">
+        <ion-icon name="send"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>
