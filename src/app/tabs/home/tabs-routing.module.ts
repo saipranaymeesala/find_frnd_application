@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { TabsPage } from './tabs.page';
+import { TabsPage } from '../tabs.page';
 
 const routes: Routes = [
   {
@@ -18,7 +18,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+            loadChildren: () => import('../home/home.module').then(m => m.HomePageModule)
           },
         ],
       },
@@ -28,7 +28,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('./callhistory/callhistory.module').then(m => m.CallhistoryPageModule)
+            loadChildren: () => import('../callhistory/callhistory.module').then(m => m.CallhistoryPageModule)
           },
         ],
       },
@@ -38,7 +38,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('./chat/chat.module').then(m => m.ChatPageModule)
+            loadChildren: () => import('../chat/chat.module').then(m => m.ChatPageModule)
           },
         ],
       },

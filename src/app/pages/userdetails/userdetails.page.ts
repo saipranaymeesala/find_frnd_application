@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ProfileService } from 'src/app/apis/profile.service';
 import { UserprofilesService } from 'src/app/apis/userprofiles.service';
 
 
@@ -10,7 +11,7 @@ import { UserprofilesService } from 'src/app/apis/userprofiles.service';
   styleUrls: ['./userdetails.page.scss'],
 })
 export class UserdetailsPage implements OnInit {
-  constructor(private router: Router, private service: UserprofilesService) { }
+  constructor(private router: Router, private service: ProfileService) { }
 
 
 
@@ -33,7 +34,8 @@ export class UserdetailsPage implements OnInit {
     this.storeDateValue = event.detail.value;
     this.dateofbirth = this.storeDateValue.slice(0, 10);
   }
-  public email = localStorage.getItem('userEmail');
+  public email:any =JSON.parse(JSON.stringify(localStorage.getItem('userEmail')));
+
   public submit() {
 
     let userDataObj = {
@@ -43,10 +45,9 @@ export class UserdetailsPage implements OnInit {
       dob: this.userDetails.get('dateofbirth')!.value
     }
     localStorage.setItem('userData', JSON.stringify(userDataObj)),
-      localStorage.setItem('userEmail', JSON.stringify(userDataObj)),
       this.router.navigate(['/avatars'])
 
-    this.service.sendUserDetails(userDataObj).subscribe((data) => {
+    this.service.sendProfileDetails(userDataObj).subscribe((data) => {
 
       console.log(data)
     })
@@ -55,6 +56,5 @@ export class UserdetailsPage implements OnInit {
 
 
   ngOnInit() {
-    console.log(this.email)
   }
 }

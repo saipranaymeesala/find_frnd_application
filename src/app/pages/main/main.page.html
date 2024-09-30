@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Dosthi App</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div id="authSection">
+    <h2>Sign Up</h2>
+    <ion-input placeholder="Name" [(ngModel)]="signupName"></ion-input>
+    <ion-input type="password" placeholder="Password" [(ngModel)]="signupPassword"></ion-input>
+    <input type="file" (change)="onFileSelected($event)" />
+    <ion-button (click)="signUp()">Sign Up</ion-button>
+
+    <h2>Sign In</h2>
+    <ion-input placeholder="Name" [(ngModel)]="signinName"></ion-input>
+    <ion-input type="password" placeholder="Password" [(ngModel)]="signinPassword"></ion-input>
+    <ion-button (click)="signIn()">Sign In</ion-button>
+  </div>
+
+  <div id="profileSection" *ngIf="currentUser">
+    <h2>Welcome, {{ currentUser.name }}</h2>
+    <h4>Other Users</h4>
+    <div *ngFor="let user of otherUsers">
+      <img [src]="user.profilePicture" class="profile-img" />
+      <span>{{ user.name }}</span>
+      <ion-button (click)="startChatOrCall(user.name)">Chat/Call</ion-button>
+    </div>
+    <ion-button (click)="logout()">Logout</ion-button>
+  </div>
+
+  <div *ngIf="isChatVisible">
+    <div id="chatMessages"></div>
+    <ion-input [(ngModel)]="chatMessage" placeholder="Type a message..."></ion-input>
+    <ion-button (click)="sendMessage()">Send</ion-button>
+    <ion-button (click)="startVideoCall()">Start Video Call</ion-button>
+    <ion-button (click)="startAudioCall()">Start Audio Call</ion-button> <!-- New button for audio call -->
+  </div>
+
+  <div *ngIf="isVideoCallVisible">
+    <video #localVideo autoplay muted style="width: 100%; height: auto;"></video>
+    <video #remoteVideo autoplay style="width: 100%; height: auto;"></video>
+    <ion-button (click)="endVideoCall()">End Video Call</ion-button>
+  </div>
+
+  <div *ngIf="isAudioCallVisible">
+    <h2>Audio Call in Progress...</h2>
+    <ion-button (click)="endAudioCall()">End Audio Call</ion-button>
+  </div>
+</ion-content>

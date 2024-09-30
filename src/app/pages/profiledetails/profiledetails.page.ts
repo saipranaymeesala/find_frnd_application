@@ -1,49 +1,81 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { AlertController, LoadingController, ModalController, Platform } from '@ionic/angular';
+import { ProfileService } from 'src/app/apis/profile.service';
 
 @Component({
   selector: 'app-profiledetails',
   templateUrl: './profiledetails.page.html',
   styleUrls: ['./profiledetails.page.scss'],
 })
-export class ProfiledetailsPage {
+export class ProfiledetailsPage implements OnInit {
   ProfiledetailsPageselectedImage: string | undefined;
+
   ProfiledetailsPagesaveProfile() {
     throw new Error('Method not implemented.');
   }
+
   selectedImage: string | null = null
   public nickname: string = '';
   public email: string = '';
   public userData: any = '';
   public changeImage: boolean = true;
+  profile={userid:'',nickname:'',email:''}
 
   constructor(
     private platform: Platform,
     private router: Router,
     private alert: AlertController,
     private loadingCtrl: LoadingController,
-    private modalCtrl: ModalController) { }
+    private modalCtrl: ModalController,
+    private prfileservice:ProfileService,
+    private route:ActivatedRoute
+  ) { }
+  public getEmail:any =JSON.parse(JSON.stringify(localStorage.getItem('userEmail')));
 
   ngOnInit() {
     console.log('profiledetailspage initialized');
-    this.userData = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('userData'))))
-    console.log(this.userData);
-  }
 
-  // Method to handle image selection from the device
+    // this.userData = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('userData')|| '{}')))
+    let iddata: any;
+    
+    // this.route.paramMap.subscribe((data) => {
+    //   iddata = data.get('id');
+    //   console.log('Fetching profile for ID:', iddata);
+    const getEmail:any =JSON.parse(JSON.stringify(localStorage.getItem('userEmail')));
+
+      this.prfileservice.getProfileDetails(getEmail).subscribe(
+        (response) => {
+          this.profile.nickname=response.nickname;
+          this.profile.email=response.email;
+          this.profile.userid=response.profileid;
+          localStorage.setItem("isActive","yes")
+          // localStorage.removeItem('userEmail')
+        },
+        (error) => {
+          console.error('Error fetching profile details:', error);
+        })
+    //   );
+    // });
+   
+      
+    }
+ 
+  
+
+
+
+
   async selectImage() {
     try {
       if (this.platform.is('hybrid')) {
-        // For mobile devices, open the device's photo library
         const image = await Camera.getPhoto({
-          source: CameraSource.Photos, // Opens photo library
-          resultType: CameraResultType.DataUrl, // Return base64 image
+          source: CameraSource.Photos, 
+          resultType: CameraResultType.DataUrl, 
         });
         this.ProfiledetailsPageselectedImage = image.dataUrl;
       } else {
-        // For web/desktop, use the file input fallback
         this.fileInputClick();
       }
     } catch (error) {
@@ -51,7 +83,6 @@ export class ProfiledetailsPage {
     }
   }
 
-  // Fallback for desktop browsers (file input for image selection)
   fileInputClick() {
     const fileInput = document.createElement('input');
     fileInput.type = 'file';
@@ -73,9 +104,16 @@ export class ProfiledetailsPage {
 
   public Logout(): void {
     this.router.navigate(['/login']);
+    localStorage.removeItem("isActive")
+    localStorage.removeItem('userEmail')
+
   }
 
   public DeleteAccount(): void {
+    localStorage.removeItem("isActive")
+    localStorage.removeItem('userEmail')
+
+
     this.alert.create({
       header: 'Delete Account',
       message: 'Are you sure?, Account will be deleted permanently',

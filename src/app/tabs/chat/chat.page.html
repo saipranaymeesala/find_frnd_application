@@ -1,4 +1,4 @@
-<ion-header>
+ <!-- <ion-header>
   <ion-toolbar color="light">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs"></ion-back-button>
@@ -6,7 +6,7 @@
         <ion-avatar>
           <ion-img [src]="userData.avatar" alt="image"></ion-img>
         </ion-avatar>
-      </ion-button>
+      </ion-button>z
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-button>
@@ -45,4 +45,60 @@
       </ion-button>
     </ion-item>
   </ion-toolbar>
-</ion-footer>
+</ion-footer> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Chat with {{ friendName }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <div *ngFor="let msg of chatMessages">
+      <div><b>{{ msg.user }}:</b> {{ msg.message }}</div>
+    </div>
+  
+    <ion-input [(ngModel)]="chatMessage" placeholder="Type a message..."></ion-input>
+    <ion-button (click)="sendMessage()">Send</ion-button>
+    <ion-button (click)="startVideoCall()">Start Video Call</ion-button>
+    <ion-button (click)="startAudioCall()">Start Audio Call</ion-button>
+  
+    <div *ngIf="isVideoCallVisible">
+      <video #localVideo autoplay muted style="width: 100%; height: auto;"></video>
+      <video #remoteVideo autoplay style="width: 100%; height: auto;"></video>
+      <ion-button (click)="endVideoCall()">End Video Call</ion-button>
+    </div>
+  
+    <div *ngIf="isAudioCallVisible">
+      <h2>Audio Call in Progress...</h2>
+      <ion-button (click)="endAudioCall()">End Audio Call</ion-button>
+    </div>
+  </ion-content>
+  

@@ -1,9 +1,9 @@
-<!-- header-content -->
+
+<!-- 
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-item>
       <ion-avatar slot="start">
-        <!-- <ion-router-link routerLink="/profiledetails"></ion-router-link> -->
         <ion-img
           src="{{userData.avatar}}"
           alt="image"
@@ -22,156 +22,368 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <!-- Message-content -->
-  <div class="div-container">
-    <ion-row>
-      <ion-col size-sm="6">
-        <ion-item color="warning">
-          <ion-icon name="warning" size="large"></ion-icon>
-          <h6>Don't share OTP & phone number</h6>
-        </ion-item>
-      </ion-col>
-      <ion-col size-sm="6">
-        <ion-item color="warning">
-          <ion-icon name="thumbs-down" size="large"></ion-icon>
-          <h6>Bad behaviour instant block</h6>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+
+
+ <ion-header>
+  <ion-toolbar>
+    <ion-title>Dosthi App</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div id="authSection">
+  
+  </div> 
+  <div id="profileSection" *ngIf="currentUser">
+    <h2>Welcome, {{ currentUser.nickname}}</h2>
+    <h4>Other Users</h4>
+    <div *ngFor="let user of otherUsers">
+      <img [src]="user.profilePicture" class="profile-img" />
+      <span>{{ user.nickname }}</span>
+      <ion-button (click)="startChatOrCall(user.nickname)">Chat/Call</ion-button>
+    </div>
+    <ion-button (click)="logout()">Logout</ion-button>
   </div>
 
-  <!-- Recommended-container -->
-  <ion-list>
-    <ion-item>
-      <h3>Recommended for you</h3>
-    </ion-item>
-  </ion-list>
-  <ion-row>
-    <ion-col>
-      <ion-card class="recommended-card">
-        <ion-card-content>
-          <ion-img
-            src="https://toppng.com/public/uploads/preview/cool-avatar-transparent-image-cool-boy-avatar-11562893383qsirclznyw.png"
-            class="img-container"
-          ></ion-img>
-          <h2>Srinadh</h2>
-          <ion-icon name="call" size="medium" class="phone-icon"></ion-icon>
-          <ion-icon name="videocam" size="medium" class="video-icon"></ion-icon>
-          <ion-icon name="chatbox" size="medium" class="chat-icon"></ion-icon>
-          <br />
-          <ion-button>Follow</ion-button>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-    <ion-col>
-      <ion-card class="recommended-card">
-        <ion-card-content>
-          <ion-img
-            src="https://img.freepik.com/free-photo/androgynous-avatar-non-binary-queer-person_23-2151100226.jpg?t=st=1725437331~exp=1725440931~hmac=bbf8cdeb60a957af090a380f188924cf31b3e05a9690b91a8ad3a58be8f12c0b&w=740"
-            class="img-container"
-          ></ion-img>
-          <h2>Bhagavan</h2>
-          <ion-icon name="call" size="medium" class="phone-icon"></ion-icon>
-          <ion-icon name="videocam" size="medium" class="video-icon"></ion-icon>
-          <ion-icon name="chatbox" size="medium" class="chat-icon"></ion-icon>
-          <br />
-          <ion-button>Follow</ion-button>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col>
-      <ion-card class="recommended-card">
-        <ion-card-content>
-          <ion-img
-            src="https://img.freepik.com/premium-photo/management-consultant-vector-flat-style-illustration_1033579-116628.jpg?w=740"
-            class="img-container"
-          ></ion-img>
-          <h2>Raju</h2>
-          <ion-icon name="call" size="medium" class="phone-icon"></ion-icon>
-          <ion-icon name="videocam" size="medium" class="video-icon"></ion-icon>
-          <ion-icon name="chatbox" size="medium" class="chat-icon"></ion-icon>
-          <br />
-          <ion-button>Follow</ion-button>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-    <ion-col>
-      <ion-card class="recommended-card">
-        <ion-card-content>
-          <ion-img
-            src="https://img.freepik.com/premium-photo/memoji-happy-man-white-background-emoji_826801-6833.jpg?w=740"
-            class="img-container"
-          ></ion-img>
-          <h2>Kiran</h2>
-          <ion-icon name="call" size="medium" class="phone-icon"></ion-icon>
-          <ion-icon name="videocam" size="medium" class="video-icon"></ion-icon>
-          <ion-icon name="chatbox" size="medium" class="chat-icon"></ion-icon>
-          <br />
-          <ion-button>Follow</ion-button>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
-  <ion-list>
-    <ion-item>
-      <p slot="end">View all</p>
-      <ion-icon
-        name="chevron-forward-outline"
-        class="arrow-icon"
-        slot="end"
-      ></ion-icon>
-    </ion-item>
-  </ion-list>
+  <div *ngIf="isChatVisible">
+    <div id="chatMessages"></div>
+    <ion-input [(ngModel)]="chatMessage" placeholder="Type a message..."></ion-input>
+    <ion-button (click)="sendMessage()">Send</ion-button>
+    <ion-button (click)="startVideoCall()">Start Video Call</ion-button>
+    <ion-button (click)="startAudioCall()">Start Audio Call</ion-button> 
+  </div>
 
-  <!-- All types of Rooms -->
-  <ion-list>
+  <div *ngIf="isVideoCallVisible">
+    <video #localVideo autoplay muted style="width: 100%; height: auto;"></video>
+    <video #remoteVideo autoplay style="width: 100%; height: auto;"></video>
+    <ion-button (click)="endVideoCall()">End Video Call</ion-button>
+  </div>
+
+  <div *ngIf="isAudioCallVisible">
+    <h2>Audio Call in Progress...</h2>
+    <ion-button (click)="endAudioCall()">End Audio Call</ion-button>
+  </div>
+</ion-content> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
     <ion-item>
-      <h3>All Types of Rooms</h3>
+      <ion-avatar slot="start">
+        <ion-img
+          src="{{userData.avatar}}"
+          alt="image"
+          (click)="profileDetails()"
+          size="large"
+        ></ion-img>
+      </ion-avatar>
+      <ion-label slot="end">
+        <ion-tab-button routerLink="/notifications">
+          <ion-icon  name="notifications" size="large"></ion-icon>
+          <ion-badge >{{notificationCount}}</ion-badge>
+        </ion-tab-button>
+      </ion-label>
+      
     </ion-item>
-  </ion-list>
-  <ion-row>
-    <ion-col>
-      <ion-card class="room-card-one">
-        <ion-card-content>
-          <h1 class="rooms-content">Private Training Rooms</h1>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-    <ion-col>
-      <ion-card class="room-card-two">
-        <ion-card-content>
-          <h1 class="rooms-content">Friends Making Rooms</h1>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col>
-      <ion-card class="room-card-three">
-        <ion-card-content>
-          <h1 class="rooms-content">Friend Groups & Rooms</h1>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-    <ion-col>
-      <ion-card class="room-card-four">
-        <ion-card-content>
-          <h1 class="rooms-content">Friends Making Rooms</h1>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
-  <ion-list>
-    <ion-item>
-      <p slot="end">View all</p>
-      <ion-icon
-        name="chevron-forward-outline"
-        class="arrow-icon"
-        slot="end"
-      ></ion-icon>
-    </ion-item>
-  </ion-list>
+  </ion-toolbar>
+</ion-header>
+
+
+
+ <ion-header>
+  <ion-toolbar>
+    <ion-title>Dosthi App</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div id="profileSection" *ngIf="currentUser">
+  <h2>Welcome, {{ currentUser.nickname}}</h2>
+  </div>
+  <ion-col>
+    <ion-card class="recommended-card" *ngFor="let user of otherUsers">
+      <ion-card-content >
+        <ion-img
+          src="https://img.freepik.com/premium-photo/memoji-happy-man-white-background-emoji_826801-6833.jpg?w=740"
+          class="img-container"
+        ></ion-img>
+        <div id="profileSection" *ngIf="currentUser">
+            <img [src]="user.profilePicture" class="profile-img" />
+            <span>{{ user.nickname }}</span>
+            <ion-button (click)="startChatOrCall(user.nickname)">Connect</ion-button>
+        </div>
+      
+        <ion-icon name="call" size="medium" class="phone-icon"></ion-icon>
+        <ion-icon name="videocam" size="medium" class="video-icon"></ion-icon>
+        <ion-icon name="chatbox" size="medium" class="chat-icon"></ion-icon>
+        <br />
+      </ion-card-content>
+    </ion-card>
+  </ion-col>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div *ngIf="isChatVisible">
+    <div id="chatMessages"></div>
+    <ion-input [(ngModel)]="chatMessage" placeholder="Type a message..."></ion-input>
+    <ion-button (click)="sendMessage()">Send</ion-button>
+    <ion-button (click)="startVideoCall()">Start Video Call</ion-button>
+    <ion-button (click)="startAudioCall()">Start Audio Call</ion-button> 
+  </div>
+
+  <div *ngIf="isVideoCallVisible">
+    <video #localVideo autoplay muted style="width: 100%; height: auto;"></video>
+    <video #remoteVideo autoplay style="width: 100%; height: auto;"></video>
+    <ion-button (click)="endVideoCall()">End Video Call</ion-button>
+  </div>
+
+  <div *ngIf="isAudioCallVisible">
+    <h2>Audio Call in Progress...</h2>
+    <ion-button (click)="endAudioCall()">End Audio Call</ion-button>
+  </div>
 </ion-content>
+
+
+
+
+
+
+
+
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+ <!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-item>
+      <ion-avatar slot="start">
+        <ion-img
+          src="{{userData.avatar}}"
+          alt="image"
+          (click)="profileDetails()"
+          size="large"
+        ></ion-img>
+      </ion-avatar>
+      <ion-label slot="end">
+        <ion-tab-button routerLink="/notifications">
+          <ion-icon  name="notifications" size="large"></ion-icon>
+          <ion-badge >{{notificationCount}}</ion-badge>
+        </ion-tab-button>
+      </ion-label>
+      
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+
+
+ <ion-header>
+  <ion-toolbar>
+    <ion-title>Dosthi App</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div id="profileSection" *ngIf="currentUser">
+  <h2>Welcome, {{ currentUser.nickname}}</h2>
+  </div>
+  <ion-col>
+    <ion-card class="recommended-card" *ngFor="let user of otherUsers">
+      <ion-card-content >
+        <ion-img
+          src="https://img.freepik.com/premium-photo/memoji-happy-man-white-background-emoji_826801-6833.jpg?w=740"
+          class="img-container"
+        ></ion-img>
+        <div id="profileSection" *ngIf="currentUser">
+            <img [src]="user.profilePicture" class="profile-img" />
+            <span>{{ user.nickname }}</span>
+            <ion-button (click)="startChatOrCall(user.nickname)">Connect</ion-button>
+        </div>
+      
+        <ion-icon name="call" size="medium" class="phone-icon"></ion-icon>
+        <ion-icon name="videocam" size="medium" class="video-icon"></ion-icon>
+        <ion-icon name="chatbox" size="medium" class="chat-icon"></ion-icon>
+        <br />
+      </ion-card-content>
+    </ion-card>
+  </ion-col>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div *ngIf="isChatVisible">
+    <div id="chatMessages"></div>
+    <ion-input [(ngModel)]="chatMessage" placeholder="Type a message..."></ion-input>
+    <ion-button (click)="sendMessage()">Send</ion-button>
+    <ion-button (click)="startVideoCall()">Start Video Call</ion-button>
+    <ion-button (click)="startAudioCall()">Start Audio Call</ion-button> 
+  </div>
+
+  <div *ngIf="isVideoCallVisible">
+    <video #localVideo autoplay muted style="width: 100%; height: auto;"></video>
+    <video #remoteVideo autoplay style="width: 100%; height: auto;"></video>
+    <ion-button (click)="endVideoCall()">End Video Call</ion-button>
+  </div>
+
+  <div *ngIf="isAudioCallVisible">
+    <h2>Audio Call in Progress...</h2>
+    <ion-button (click)="endAudioCall()">End Audio Call</ion-button>
+  </div>
+</ion-content> -->
+
+
+
+
+
+
+
+
+
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-item>
+      <ion-avatar slot="start">
+        <!-- <ion-img src="{{userData.avatar}}" alt="image" size="large" (click)="profileDetails()"></ion-img> -->
+      </ion-avatar>
+      <ion-label slot="end">
+        <ion-tab-button routerLink="/notifications">
+          <ion-icon name="notifications" size="large"></ion-icon>
+          <ion-badge>{{notificationCount}}</ion-badge>
+        </ion-tab-button>
+      </ion-label>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Dosthi App</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="profileSection" *ngIf="currentUser">
+    <h2>Welcome, {{ currentUser.nickname }}</h2>
+  </div>
+  <ion-col>
+    <ion-card class="recommended-card" *ngFor="let user of otherUsers">
+      <ion-card-content>
+        <img [src]="user.profilePicture" class="profile-img" />
+        <span>{{ user.nickname }}</span>
+        <ion-button (click)="startChatOrCall(user.nickname)">Connect</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-col>
+</ion-content>
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+ 

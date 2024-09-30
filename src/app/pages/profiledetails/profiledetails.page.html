@@ -45,30 +45,18 @@ profile
     </ion-button>
   </ion-avatar>
 </ng-template>
-
-  <!-- <ion-avatar class="profile-avatar">
-    <ion-img src="{{userData.avatar}}" alt="image" size="large"></ion-img>
-    <ion-img [src]="selectedImage || 'assets/default-profile.png'">
-    </ion-img>
-    <ion-button 
-    class="edit-btn" 
-    fill="clear" 
-    (click)="selectImage()">
-      <ion-icon name="create-outline"></ion-icon>
-    </ion-button>
-  </ion-avatar> -->
 </div>
 
 <ion-item>
-  <ion-label>Nickname :</ion-label>
+  <ion-label>Nickname :{{profile.nickname}}</ion-label>
 </ion-item>
 
 <ion-item>
-  <ion-label>UserId : </ion-label>
+  <ion-label>UserId :{{profile.userid}} </ion-label>
 </ion-item>
 
 <ion-item>
-  <ion-label >Email :</ion-label>
+  <ion-label >Email :{{profile.email}}</ion-label>
 </ion-item>
 
 <ion-grid>
@@ -104,3 +92,5 @@ profile
     </ion-row>
   </ion-grid>
 </ion-footer>
+
+

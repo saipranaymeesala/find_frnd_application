@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 import { LoadingController } from '@ionic/angular';
 import { LoginService } from 'src/app/apis/login.service';
+import { EmailService } from 'src/app/apis/email.service';
+import { ProfileService } from 'src/app/apis/profile.service';
 
 
 @Component({
@@ -23,7 +25,7 @@ export class LoginPage implements OnInit {
   public otpValidation: boolean = false;
   public interval: any;
 
-  constructor(private router: Router, private service: LoginService, private loadingCtrl: LoadingController) { }
+  constructor(private router: Router, private service1: LoginService, private loadingCtrl: LoadingController,private service2: EmailService,private service3:ProfileService) { }
 
   errors = [
     { type: 'required', message: 'Field cannot be empty' },
@@ -56,21 +58,19 @@ export class LoginPage implements OnInit {
 
       this.loadingCtrl.create({
         keyboardClose: true,
-        message: 'Sending Otp...'
+        message: 'Sending OTP...'
       }).then((sending) => sending.present());
       setTimeout(() => {
 
-        this.service.sendOTP(email).subscribe(async (response: HttpResponse<any>) => {
+        this.service2.sendEmail(email).subscribe(
+          
+          async (response: HttpResponse<any>) => {
+            
+            console.log(response)
           this.loadingCtrl.dismiss();
           const status: number = response.status;
-          const OTP = response.body.code;
-
-          const cache = await caches.open('my-cache');
-          await cache.put(`http://localhost:9090/api/sendOtp?email=${email}`, new Response(JSON.stringify({ OTP }),
-            { headers: { 'Content-Type': 'application/json' } }));
-
-          console.log("send otp code", OTP) // console
           if (status === 200) {
+            console.log("done")
             this.isVisibleEmailInput = false;
             this.otpsent = false;
             this.resend = false;
@@ -87,9 +87,12 @@ export class LoginPage implements OnInit {
           }
           localStorage.setItem('userEmail', email)
         },
-          err => { }
+          
         );
-      }, 3300)
+      
+      }
+    
+    , 3300)
     }
     else {
       console.log("invalid email id");
@@ -101,7 +104,7 @@ export class LoginPage implements OnInit {
     const otpValid: boolean = this.login.controls.otp.valid;
     if (otpValid) {
       const otp: any = this.login.controls.otp.value;
-      this.service.verifyOTP(otp).subscribe((Response: HttpResponse<any>) => {
+      this.service1.verifyOTP(otp).subscribe((Response: HttpResponse<any>) => {
         const response: number = Response.status;
 
         if (response === 200) {
@@ -115,8 +118,22 @@ export class LoginPage implements OnInit {
             this.otpValidation = false;
             this.otpsent = true;
             this.login.reset();
+
             this.loadingCtrl.dismiss();
-            this.router.navigate(['/userdetails']);
+        const emailData:any =JSON.parse(JSON.stringify(localStorage.getItem('userEmail')));
+
+            this.service3.getProfileDetails(emailData).subscribe((data)=>
+            {
+              if(!data)
+                {
+                  this.router.navigate(['/userdetails']);
+
+                }
+                else{
+                  this.router.navigate(['/tabs'])
+
+                }
+            })
           }, 1500)
         }
       },
