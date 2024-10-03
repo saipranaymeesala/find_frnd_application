@@ -12,6 +12,8 @@ export class EmailService {
   public sendEmail(email:any):Observable<any>
   {
     console.log("called......")
-    return this.http.post<Observable<any>>("http://localhost:3000/api/email/sendEmail",{email:email});
+    return this.http.post<Observable<any>>("https://bommanasolutions.in/api/email/sendEmail",{email:email});
   }
+
+
 }

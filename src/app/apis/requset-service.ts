@@ -11,7 +11,7 @@ import { Observable } from "rxjs";
 
 export class RequsetService implements Request {
     title:any;
-    private readonly GET:any="http://64.227.191.74:9090/api"
+    private readonly GET:any="https://bommanasolutions.in/api"
     constructor(private http:HttpClient){}
     public getData():Observable<any>
     {

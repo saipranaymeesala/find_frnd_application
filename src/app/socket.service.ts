@@ -20,7 +20,7 @@ export class SocketService {
   private socket: any;
 
   constructor() {
-    this.socket = io('http://localhost:3000/');
+    this.socket = io('https://bommanasolutions.in/');
   }
 
   joinRoom(roomId: string) {

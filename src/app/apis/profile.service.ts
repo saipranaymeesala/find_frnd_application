@@ -13,13 +13,13 @@ export class ProfileService {
   {
 
     
-  return this.http.post("http://localhost:3000/api/profile/sendprofiledetails",{email:profile.email,gender:profile.gender,dateofbirth:profile.dob,nickname:profile.name})
+  return this.http.post("https://bommanasolutions.in/api/profile/sendprofiledetails",{email:profile.email,gender:profile.gender,dateofbirth:profile.dob,nickname:profile.name})
   }
 
 
   public getProfileDetails(email:any):Observable<any>
   {
-  return this.http.post("http://localhost:3000/api/profile/getprofiledetails",{email})
+  return this.http.post("https://bommanasolutions.in/api/profile/getprofiledetails",{email})
   }
 
 }

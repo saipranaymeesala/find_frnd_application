@@ -1,59 +1,23 @@
+
 .chat-container {
-  padding: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  min-height: 100%;
-  overflow-y: auto; /* Enable scrolling */
-  scrollbar-width: none; /* Hide scrollbar in Firefox */
 }
- 
-.chat-container::-webkit-scrollbar {
-  width: 0; /* Hide scrollbar in WebKit browsers */
+
+.local-message {
+  align-self: flex-end;
+  background-color: #cfe9ff;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 8px;
+  max-width: 80%;
 }
- 
-.typing-indicator {
-  padding: 5px;
-  margin-top: 10px;
-  color: #999;
-  text-align: left;
-}
- 
-.user-message, .bot-message {
-  padding: 5px;
-  border-radius: 10px;
-  margin: 5px 0;
-  width: fit-content;
-  max-width: 100%;
-}
- 
-.user-message {
-  float: right;
-  background-color: #fff;
-  text-align: right;
-}
- 
-.bot-message {
-  float: left;
-  background-color: #ffffff;
-  text-align: left;
-}
- 
-ion-footer {
-  bottom: 0;
-  width: 100%;
-}
- 
-ion-content {
-  --background: #fe9900;
-}
- 
-.icon {
-  width: 40px;
-  margin-right: 5px;
-}
- 
-.message-container {
-  display: flex;
-  align-items: center;
+
+.remote-message {
+  align-self: flex-start; 
+  background-color: #f1f1f1; 
+  padding: 10px;
+  margin: 5px;
+  border-radius: 8px;
+  max-width: 80%;
 }

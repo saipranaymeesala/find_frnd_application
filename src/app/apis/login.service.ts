@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class LoginService implements OnInit {
-  private URL: string = 'http://localhost:3000/api/';
+  private URL: string = 'https://bommanasolutions.in/api/';
 
   constructor(private req: RequsetService, private http: HttpClient,private router:Router) { }
 
@@ -20,7 +20,7 @@ export class LoginService implements OnInit {
 
 
   public verifyOTP(userOtp: any): Observable<HttpResponse<any>> {
-    return this.http.post(`${this.URL}` + 'email/verifyOTP', { userOtp: userOtp }, { observe: 'response' });
+    return this.http.post(`${this.URL}email/verifyOTP`, { userOtp: userOtp }, { observe: 'response' });
   }
 ngOnInit(): void {
   if(localStorage.getItem("isActive"))

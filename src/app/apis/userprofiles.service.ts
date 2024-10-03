@@ -11,7 +11,7 @@ export class UserprofilesService {
 
   public sendUserDetails(
     profile: any): Observable<any> {
-    return this.http.post('http://localhost:3000/api/sendUserDetails', {
+    return this.http.post('https://bommanasolutions.in/api/sendUserDetails', {
       email: profile.email,
       profile: profile.profile,
       nickname: profile.nickname,
