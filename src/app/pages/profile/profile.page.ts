@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController, ModalController, NavController } from '@ionic/angular';
-import { AdModalPage } from '../pages/ad-modal/ad-modal.page';
+import { AdModalPage } from '../ad-modal/ad-modal.page';
+import { ProfileService } from '../../apis/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,13 +10,32 @@ import { AdModalPage } from '../pages/ad-modal/ad-modal.page';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-  userData: any;
-  
-  constructor(private router: Router, private menu: MenuController, private modalCtrl: ModalController, private navCtrl: NavController) { }
+  public nickname: string = '';
+  public email: string = '';
+  public userData: any = '';
+  public changeImage: boolean = true;
+  profile={userid:'',nickname:'',email:''}
+
+  constructor(private router: Router, private menu: MenuController, private modalCtrl: ModalController, private navCtrl: NavController,     private prfileservice:ProfileService,
+  ) { }
 
   ngOnInit() {
     this.userData = JSON.parse(localStorage.getItem('userData') || '{}');
     console.log(this.userData);
+    const getEmail:any =JSON.parse(JSON.stringify(localStorage.getItem('userEmail')));
+
+      this.prfileservice.getProfileDetails(getEmail).subscribe(
+        (response) => {
+          this.profile.nickname=response.nickname;
+          this.profile.email=response.email;
+          this.profile.userid=response.profileid;
+          localStorage.setItem("isActive","yes")
+          // localStorage.removeItem('userEmail')
+        },
+        (error) => {
+          console.error('Error fetching profile details:', error);
+        })
+
   }
 
   async goToAdd() {

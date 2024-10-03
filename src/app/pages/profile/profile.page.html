@@ -41,9 +41,23 @@
   </div>
 
   <ion-card class="menu-items">
-    <ion-item lines="none"><ion-icon name="person-circle-outline"></ion-icon>User ID*</ion-item>
+    <!-- <ion-item lines="none"><ion-icon name="person-circle-outline"></ion-icon>User ID*</ion-item>
     <ion-item lines="none"><ion-icon name="heart-outline"></ion-icon>NickName*</ion-item>
-    <ion-item lines="none"><ion-icon name="mail-outline"></ion-icon>Email*</ion-item>
+    <ion-item lines="none"><ion-icon name="mail-outline"></ion-icon>Email*</ion-item> -->
+
+    <ion-item>
+      
+      <ion-label>Nickname :{{profile.nickname}}</ion-label>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label>UserId :{{profile.userid}} </ion-label>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label >Email :{{profile.email}}</ion-label>
+    </ion-item>
+    
     <!-- <ion-item routerLink="/tabs" lines="none"><ion-icon name="home-outline"></ion-icon>Home</ion-item>
     <ion-item lines="none"><ion-icon name="alert-circle-outline"></ion-icon>About Dosthi</ion-item>
     <ion-item lines="none"><ion-icon name="lock-closed-outline"></ion-icon>Privacy Policy</ion-item>
@@ -53,8 +67,6 @@
     <ion-item routerLink="/login" lines="none"><ion-icon name="exit-outline"></ion-icon>Log Out</ion-item> -->
     <!-- <ion-item lines="none"><ion-icon name="trash-outline"></ion-icon>Delete Account</ion-item> -->
   </ion-card>
-  
-
   <!-- <ion-button class="logout-bt" expand="full" shape="round" (click)="confirmDelete()">Delete Account</ion-button> -->
 </ion-content>
 
