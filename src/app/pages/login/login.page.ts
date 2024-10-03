@@ -6,7 +6,7 @@ import { LoadingController } from '@ionic/angular';
 import { LoginService } from 'src/app/apis/login.service';
 import { EmailService } from 'src/app/apis/email.service';
 import { ProfileService } from 'src/app/apis/profile.service';
-
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +25,9 @@ export class LoginPage implements OnInit {
   public otpValidation: boolean = false;
   public interval: any;
 
-  constructor(private router: Router, private service1: LoginService, private loadingCtrl: LoadingController,private service2: EmailService,private service3:ProfileService) { }
+  constructor(private router: Router, private service1: LoginService, private loadingCtrl: LoadingController,private service2: EmailService,private service3:ProfileService,private storage: Storage) {
+    this.initStorage();
+   }
 
   errors = [
     { type: 'required', message: 'Field cannot be empty' },
@@ -48,6 +50,9 @@ export class LoginPage implements OnInit {
     else {
       return { 'emailpattern': true };
     }
+  }
+  async initStorage() {
+    await this.storage.create();
   }
 
   public async sendOTP() {
@@ -86,6 +91,8 @@ export class LoginPage implements OnInit {
             }, 1000)
           }
           localStorage.setItem('userEmail', email)
+          await this.storage.set('isLoggedIn', true);
+
         },
           
         );
@@ -106,7 +113,7 @@ export class LoginPage implements OnInit {
       const otp: any = this.login.controls.otp.value;
       this.service1.verifyOTP(otp).subscribe((Response: HttpResponse<any>) => {
         const response: number = Response.status;
-
+        
         if (response === 200) {
           this.loadingCtrl.create(
             {

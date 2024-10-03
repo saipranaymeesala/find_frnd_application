@@ -26,7 +26,7 @@ export class ProfilePage implements OnInit {
   }
 
   goToSettings() {
-    this.router.navigate(['../settings']);
+    this.router.navigate(['/settings']);
   }
   goToAboutDosthi() {
     this.router.navigate(['/aboutDosthi']);

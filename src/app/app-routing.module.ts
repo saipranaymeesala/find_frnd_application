@@ -55,6 +55,11 @@ const routes: Routes = [
     path: 'ad-modal',
     loadChildren: () => import('./pages/ad-modal/ad-modal.module').then( m => m.AdModalPageModule)
   },
+  {
+    path: 'settings',
+    loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
+  },
+
 
 
 
