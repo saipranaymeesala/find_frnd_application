@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar class="custom-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/profile" style="color: white;"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="custom-title">Reward Wallet</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div class="wallet-container">
+    <h2>Total Earned</h2>
+    <ion-row>
+      <ion-col size="6" offset="3">
+        <ion-text color="dark"><ion-label>Enter Amount:</ion-label>
+         <ion-input placeholder="₹" class="wallet-rupee"></ion-input></ion-text>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="10" offset="1">
+        <ion-button color="success" padding>Add Money</ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-button expand="block" color="success" class="wallet-button">Withdraw</ion-button>
+
+    <ion-button expand="block" color="light" class="kyc-button">Submit KYC Details</ion-button>
+
+    <p class="tds-info">Save <span class="highlight">4%</span> on TDS after submitting KYC details</p>
+    <p>Minimum ₹1 required for withdraw</p>
+
+    <div class="icons-container">
+      <ion-grid>
+        <ion-row>
+          <ion-col class="icon-col">
+            <ion-icon name="shield-checkmark-outline"></ion-icon>
+            <p>Secure Payment</p>
+          </ion-col>
+          <ion-col class="icon-col">
+            <ion-icon name="chatbubble-outline"></ion-icon>
+            <p>Guaranteed Chat</p>
+          </ion-col>
+          <ion-col class="icon-col">
+            <ion-icon name="cash-outline"></ion-icon>
+            <p>₹2 Cr+ Payments</p>
+          </ion-col>
+          <ion-col class="icon-col">
+            <ion-icon name="people-outline"></ion-icon>
+            <p>50 Lacs+ Trusted Users</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <h3>Recent Transactions</h3>
+    <div class="no-transactions">
+      <p>No transactions yet.</p>
+    </div>
+  </div>
+
+</ion-content>
+

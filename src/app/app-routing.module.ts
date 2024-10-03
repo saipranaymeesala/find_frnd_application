@@ -43,6 +43,19 @@ const routes: Routes = [
     path: 'main',
     loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule)
   },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'wallet',
+    loadChildren: () => import('./pages/wallet/wallet.module').then( m => m.WalletPageModule)
+  },
+  {
+    path: 'ad-modal',
+    loadChildren: () => import('./pages/ad-modal/ad-modal.module').then( m => m.AdModalPageModule)
+  },
+
 
 
 ];

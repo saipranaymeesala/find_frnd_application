@@ -304,9 +304,9 @@ export class HomePage implements OnInit {
       error => alert(error.error.error)
     );
   }
-  public profileDetails() {
+  public profile() {
 
-        this.router.navigate(['/profiledetails']);
+        this.router.navigate(['/profile']);
       }
   loadUsers() {
     this.http.get(`https://bommanasolutions.in/users/${this.currentUser.email}`).subscribe((users: any) => {

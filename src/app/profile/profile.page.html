@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-back-button style="color: white;" defaultHref="/tabs"></ion-back-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button class="wallet-button"  (click)="goToWallet()">
+        <ion-icon name="wallet-outline" class="custom-icon" ></ion-icon>
+      </ion-button>
+
+      <ion-button class="coin-button" (click)="goToCoin()">
+        <ion-icon name="cash-outline" class="custom-icon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+     <ion-button class="add-button" (click)="goToAdd()">
+        <ion-icon name="tv-outline" class="custom-icon"></ion-icon>
+      </ion-button>
+     </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleMenu()">
+        <ion-icon name="menu" class="menu-icon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="menu-header-bg"></div>
+  <div class="header-content">
+    <div class="profile-image-container">
+      <ion-avatar class="profile-avatar">
+        <ion-img src="{{userData.avatar}}" alt="image" size="large"></ion-img>
+      </ion-avatar>
+    </div>
+  </div>
+
+  <ion-card class="menu-items">
+    <ion-item lines="none"><ion-icon name="person-circle-outline"></ion-icon>User ID*</ion-item>
+    <ion-item lines="none"><ion-icon name="heart-outline"></ion-icon>NickName*</ion-item>
+    <ion-item lines="none"><ion-icon name="mail-outline"></ion-icon>Email*</ion-item>
+    <!-- <ion-item routerLink="/tabs" lines="none"><ion-icon name="home-outline"></ion-icon>Home</ion-item>
+    <ion-item lines="none"><ion-icon name="alert-circle-outline"></ion-icon>About Dosthi</ion-item>
+    <ion-item lines="none"><ion-icon name="lock-closed-outline"></ion-icon>Privacy Policy</ion-item>
+    <ion-item lines="none"><ion-icon name="document-text-outline"></ion-icon>User Agreement</ion-item>
+    <ion-item lines="none"><ion-icon name="document-lock-outline"></ion-icon>Acount & Security</ion-item>
+    <ion-item lines="none"><ion-icon name="person-remove-outline"></ion-icon>Blocked List</ion-item>
+    <ion-item routerLink="/login" lines="none"><ion-icon name="exit-outline"></ion-icon>Log Out</ion-item> -->
+    <!-- <ion-item lines="none"><ion-icon name="trash-outline"></ion-icon>Delete Account</ion-item> -->
+  </ion-card>
+  
+
+  <!-- <ion-button class="logout-bt" expand="full" shape="round" (click)="confirmDelete()">Delete Account</ion-button> -->
+</ion-content>

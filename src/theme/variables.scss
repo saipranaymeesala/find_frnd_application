@@ -1,7 +1,10 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
 :root{
-    --ion-background-color:#fe9900;
+    --background: linear-gradient(90deg, #fe8899 0%, #fe9900);
     // --color:#ffffff;
     // --ion-text-color: white;
+}
+ion-content{
+    --background: linear-gradient(90deg, #fe8899 0%, #fe9900);
 }

@@ -1,0 +1,14 @@
+.ad-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background: linear-gradient(90deg, #fe8899 0%, #fe9900);
+  }
+  ion-toolbar {
+    --background: linear-gradient(90deg, #fe8899 0%, #fe9900);
+}
+ion-title {
+  padding-left: 35%;
+}
+  
