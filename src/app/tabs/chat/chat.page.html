@@ -11,7 +11,7 @@
       <ion-button (click)="startAudioCall()">
         <ion-icon name="call-outline" size="large"></ion-icon>
       </ion-button>
-      <ion-button (click)="startVideoCall()">
+      <ion-button (click)="startVideoCall(true)">
 
         <ion-icon name="videocam-outline" size="large">
       </ion-icon>
@@ -48,19 +48,63 @@
   </ion-toolbar>
 </ion-footer>
 <ion-content>
-  <div *ngIf="isVideoCallVisible">
-   <video #localVideo autoplay muted style="width: 100%; height: auto;"></video>
-   <video #remoteVideo autoplay style="width: 100%; height: auto;"></video>
-   <ion-button (click)="endVideoCall()">End Video Call</ion-button>
- </div>
- <div *ngIf="isAudioCallVisible">
-   <h2>Audio Call in Progress...</h2>
-   <ion-button (click)="endAudioCall()">End Audio Call</ion-button>
- </div>
+  
 </ion-content> 
 
 
-
+<ion-content  [fullscreen]="true" >
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-icon name="arrow-back-outline" routerLink="/tabs"></ion-icon>
+          
+          <ion-buttons slot="end">
+            <ion-button (click)="startVideoCall(false)">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      
+        <div *ngIf="isVideoCallVisible">
+          <div class="call-container">
+            <video #localVideo autoplay muted id="localVideo"></video>
+          <video #remoteVideo autoplay  id="remoteVideo" style="height: 750px;" >
+          </video>
+          <div class="call-controls">
+            <ion-button>
+              <ion-icon name="camera-reverse"></ion-icon>
+            </ion-button>
+            <ion-button>
+              <ion-icon name="videocam"></ion-icon>
+            </ion-button>
+            <ion-button>
+              <ion-icon name="mic-off"></ion-icon>
+            </ion-button>
+            <ion-button color="danger">
+              <ion-icon name="call"></ion-icon>
+            </ion-button>
+          </div>
+          </div>
+          <div class="call-info">
+            <h2>Name</h2>
+           </div>
+          
+        </div>
+      
+        
+          
+      
+        <div *ngIf="isAudioCallVisible">
+          <h2>Audio Call in Progress...</h2>
+        
+        </div>
+   
+     <ion-footer>
+      <ion-button (click)="endVideoCall(false)">End Video Call</ion-button>
+     </ion-footer>
+    </ng-template>
+  </ion-modal>
+</ion-content>
 
 
 

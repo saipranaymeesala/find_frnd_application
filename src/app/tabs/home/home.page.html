@@ -28,7 +28,7 @@
   <ion-col>
     <ion-card class="recommended-card" *ngFor="let user of otherUsers">
       <ion-card-content>
-        <img [src]="user.profilePicture" class="profile-img" />
+        <img [src]="user.profilePicture" class="profile-img"/>
         <span>{{ user.nickname }}</span>
         <ion-button (click)="startChatOrCall(user.nickname)">Connect</ion-button>
       </ion-card-content>

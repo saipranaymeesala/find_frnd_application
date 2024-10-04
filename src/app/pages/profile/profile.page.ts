@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { MenuController, ModalController, NavController } from '@ionic/angular';
 import { AdModalPage } from '../ad-modal/ad-modal.page';
 import { ProfileService } from '../../apis/profile.service';
-
+import { AlertController, LoadingController, Platform } from '@ionic/angular';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -16,7 +16,7 @@ export class ProfilePage implements OnInit {
   public changeImage: boolean = true;
   profile={userid:'',nickname:'',email:''}
 
-  constructor(private router: Router, private menu: MenuController, private modalCtrl: ModalController, private navCtrl: NavController,     private prfileservice:ProfileService,
+  constructor(private router: Router, private menu: MenuController, private modalCtrl: ModalController, private navCtrl: NavController,     private prfileservice:ProfileService,private platform: Platform,private alert: AlertController,private loadingCtrl: LoadingController
   ) { }
 
   ngOnInit() {
@@ -85,33 +85,37 @@ export class ProfilePage implements OnInit {
     this.router.navigate(['/login'])
   }
 
-  // FOR Delete Account
-  // async confirmDelete() {
-  //   try {
-  //     const alert = await this.alertCtrl.create({
-  //       header: 'Confirm',
-  //       message: 'Are you sure you want to delete this item?',
-  //       buttons: [
-  //         {
-  //           text: 'Cancel',
-  //           role: 'cancel',
-  //           handler: () => {
-  //             console.log('Delete canceled');
-  //           }
-  //         },
-  //         {
-  //           text: 'OK',
-  //           handler: () => {
-  //             console.log('Item deleted');
-  //             this.router.navigate(['/introduction']);
-  //           }
-  //         }
-  //       ]
-  //     });
+  public DeleteAccount():any {
+    this.alert.create({
+      header: 'Delete Account',
+      message: 'Are you sure?, Account will be deleted permanently',
+      buttons: [{
+        text: 'cancel',
+        role: 'cancel'
+      },
+      {
+        text: 'delete',
+        handler: () => {
+          this.loadingCtrl.create(
+            {
+              keyboardClose: true, message: ' Deleting ...'
+            }).then((deleting) => deleting.present());
+          setTimeout(() => {
+            this.loadingCtrl.dismiss();
+            this.alert.create({
+              message: 'Your account deleted successfully',
+            }).then((alert) => {
+              alert.style.background = 'white',
+                alert.present()
+              this.router.navigate(['/introduction']);
+            });
+          }, 1500)
 
-  //     await alert.present();
-  //   } catch (error) {
-  //     console.error('Error presenting alert:', error);
-  //   }
-  // }
+        }
+      }],
+    }).then((alert) => {
+      alert.style.background = 'white',
+        alert.present()
+    });
+  }
 }

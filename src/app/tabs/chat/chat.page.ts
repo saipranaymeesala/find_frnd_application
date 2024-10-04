@@ -225,6 +225,7 @@ export class ChatPage implements OnInit {
   peerConnection: RTCPeerConnection | null = null;
   isVideoCallVisible: boolean = false;
   isAudioCallVisible: boolean = false;
+  isModalOpen:boolean = false;
 
 
   @ViewChild('localVideo', { static: false }) localVideo: any;
@@ -260,7 +261,8 @@ export class ChatPage implements OnInit {
     }
   }
 
-  startVideoCall() {
+  startVideoCall(isOpen: boolean) {
+    this.isModalOpen = isOpen;
     navigator.mediaDevices.getUserMedia({ video: true, audio: true })
       .then(stream => {
         this.localStream = stream;
@@ -335,7 +337,7 @@ export class ChatPage implements OnInit {
       });
   }
 
-  endVideoCall() {
+  endVideoCall(isOpen: boolean) {
     if (this.peerConnection) {
       this.peerConnection.close();
       this.peerConnection = null;
