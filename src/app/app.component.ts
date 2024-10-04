@@ -34,7 +34,7 @@ export class AppComponent {
   
     if (isLoggedIn) {
       console.log('User is logged in, navigating to home...');
-      this.navCtrl.navigateRoot('/home');
+      this.navCtrl.navigateRoot('/tabs');
     } else {
       console.log('User is not logged in, navigating to login...');
       this.navCtrl.navigateRoot('/login');
