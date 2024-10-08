@@ -4,6 +4,7 @@ import { MenuController, ModalController, NavController } from '@ionic/angular';
 import { AdModalPage } from '../ad-modal/ad-modal.page';
 import { ProfileService } from '../../apis/profile.service';
 import { AlertController, LoadingController, Platform } from '@ionic/angular';
+import {Share} from '@capacitor/share'; 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -44,6 +45,15 @@ export class ProfilePage implements OnInit {
     });
     return await modal.present();
   }
+  async shareAppViaWhatsApp(){
+    await Share.share({
+      title: 'Join Dosthi!',
+      text: 'Join Dosthi and connect with like-minded people!',
+      url: 'https://play.google.com/store/apps/details?id=com.dating.for.all&hl=en_IN',
+      dialogTitle: 'Share Dosthi'
+    });
+  }
+
 
   goToSettings() {
     this.router.navigate(['/settings']);

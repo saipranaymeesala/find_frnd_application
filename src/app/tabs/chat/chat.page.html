@@ -1,20 +1,16 @@
- 
-
 <ion-header>
   <ion-toolbar color="light">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs"></ion-back-button>
-      <ion-button> 
-      </ion-button>
+      <ion-button> </ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-button (click)="startAudioCall()">
         <ion-icon name="call-outline" size="large"></ion-icon>
       </ion-button>
-      <ion-button (click)="startVideoCall(true)">
-
-        <ion-icon name="videocam-outline" size="large">
-      </ion-icon>
+      <ion-button class="video-call-icon" (click)="startVideoCall(true)">
+        <ion-icon name="videocam-outline" size="large" class="video-icon">
+        </ion-icon>
       </ion-button>
       <ion-button>
         <ion-icon name="ellipsis-vertical-outline" size="large"></ion-icon>
@@ -22,122 +18,78 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true" #content>
+<ion-content  [fullscreen]="true" #content>
   <div class="chat-container">
-    <div *ngFor="let msg of chatMessages" [ngClass]="{'local-message': msg.user === friendName, 'remote-message': msg.user !== friendName}">
+    <div
+      *ngFor="let msg of chatMessages"
+      [ngClass]="{'local-message': msg.user === friendName, 'remote-message': msg.user !== friendName}"
+    >
       <!-- <div><b>{{ msg.user }}:</b> {{ msg.message }}</div> -->
       <div>{{ msg.message }}</div>
-
     </div>
   </div>
+  
+<ion-content *ngIf="isCalling" [fullscreen]="true" class="video-call-content">
+ 
+  <div *ngIf="isVideoCallVisible">
+    <div class="video-container">
+      
+      <div class="local-video" slot="">
+        <video #localVideo autoplay muted ></video>
+      </div>
+      <div class="remote-video">
+        <video #remoteVideo autoplay></video>
+      </div>
+    </div>
+  </div>
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+      <ion-fab-button
+        color="danger"
+        (click)="endVideoCall(false)"
+        (click)="startVideoCall(false)"
+        routerLink="/tabs/chat"
+      >
+        <ion-icon name="call"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button color="light" (click)="toggleMute()">
+        <ion-icon name="mic-off" [name]="isMuted ? 'mic-off' : 'mic'"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+      <ion-fab-button color="light" (click)="switchCamera()">
+        <ion-icon name="camera-reverse"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+</ion-content>
+<ion-content  [fullscreen]="true" >
+<div *ngIf="isAudioCallVisible">
+  <ion-text color="light" slot="center">
+    <h1>calling to {{friendName}}.....</h1>
+  </ion-text>
+</div>
+</ion-content>
 </ion-content>
 
 
 
 
 
- 
 <ion-footer>
   <ion-toolbar>
     <ion-item class="message-container">
-      <ion-input [(ngModel)]="chatMessage" placeholder="Type a message..."></ion-input>
+      <ion-input
+        [(ngModel)]="chatMessage"
+        placeholder="Type a message..."
+      ></ion-input>
       <ion-button class="icon" (click)="sendMessage()" fill="solid">
         <ion-icon name="send"></ion-icon>
       </ion-button>
     </ion-item>
   </ion-toolbar>
 </ion-footer>
-<ion-content>
-  
-</ion-content> 
-
-
-<ion-content  [fullscreen]="true" >
-  <ion-modal [isOpen]="isModalOpen">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-icon name="arrow-back-outline" routerLink="/tabs"></ion-icon>
-          
-          <ion-buttons slot="end">
-            <ion-button (click)="startVideoCall(false)">Close</ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      
-        <div *ngIf="isVideoCallVisible">
-          <div class="call-container">
-            <video #localVideo autoplay muted id="localVideo"></video>
-          <video #remoteVideo autoplay  id="remoteVideo" style="height: 750px;" >
-          </video>
-          <div class="call-controls">
-            <ion-button>
-              <ion-icon name="camera-reverse"></ion-icon>
-            </ion-button>
-            <ion-button>
-              <ion-icon name="videocam"></ion-icon>
-            </ion-button>
-            <ion-button>
-              <ion-icon name="mic-off"></ion-icon>
-            </ion-button>
-            <ion-button color="danger">
-              <ion-icon name="call"></ion-icon>
-            </ion-button>
-          </div>
-          </div>
-          <div class="call-info">
-            <h2>Name</h2>
-           </div>
-          
-        </div>
-      
-        
-          
-      
-        <div *ngIf="isAudioCallVisible">
-          <h2>Audio Call in Progress...</h2>
-        
-        </div>
-   
-     <ion-footer>
-      <ion-button (click)="endVideoCall(false)">End Video Call</ion-button>
-     </ion-footer>
-    </ng-template>
-  </ion-modal>
-</ion-content>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- <ion-header>
   <ion-toolbar>
     <ion-title>Chat with {{ friendName }}</ion-title>
@@ -166,9 +118,6 @@
   </div>
 </ion-content> -->
 
-
-
-
 <!-- <ion-header>
   <ion-toolbar>
     <ion-title>Chat with {{ friendName }}</ion-title>
@@ -196,15 +145,3 @@
     <ion-button (click)="endAudioCall()">End Audio Call</ion-button>
   </div>
 </ion-content> -->
-
-
-
-
-
-
-
-
-
-
-
-

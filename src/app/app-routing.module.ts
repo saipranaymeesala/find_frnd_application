@@ -58,7 +58,15 @@ const routes: Routes = [
   {
     path: 'settings',
     loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
+  },  {
+    path: 'termsandservices',
+    loadChildren: () => import('./pages/termsandservices/termsandservices.module').then( m => m.TermsandservicesPageModule)
   },
+  {
+    path: 'userpolicy',
+    loadChildren: () => import('./pages/userpolicy/userpolicy.module').then( m => m.UserpolicyPageModule)
+  },
+
 
 
 

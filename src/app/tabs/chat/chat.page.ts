@@ -210,7 +210,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SocketService } from 'src/app/socket.service';
-
+import { AnimationController } from '@ionic/angular';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.page.html',
@@ -225,7 +225,9 @@ export class ChatPage implements OnInit {
   peerConnection: RTCPeerConnection | null = null;
   isVideoCallVisible: boolean = false;
   isAudioCallVisible: boolean = false;
-  isModalOpen:boolean = false;
+  isCalling: boolean = false;
+  isMuted: boolean = false;
+  isAudioCall:boolean= false;
 
 
   @ViewChild('localVideo', { static: false }) localVideo: any;
@@ -235,7 +237,7 @@ export class ChatPage implements OnInit {
     iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
   };
 
-  constructor(private route: ActivatedRoute, private socketService: SocketService) {}
+  constructor(private route: ActivatedRoute, private socketService: SocketService,private animationCtrl: AnimationController) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -262,7 +264,7 @@ export class ChatPage implements OnInit {
   }
 
   startVideoCall(isOpen: boolean) {
-    this.isModalOpen = isOpen;
+    this.isCalling = true;
     navigator.mediaDevices.getUserMedia({ video: true, audio: true })
       .then(stream => {
         this.localStream = stream;
@@ -301,6 +303,7 @@ export class ChatPage implements OnInit {
   }
 
   startAudioCall() {
+    this.isAudioCall=true;
     navigator.mediaDevices.getUserMedia({ audio: true })
       .then(stream => {
         this.localStream = stream;
@@ -338,6 +341,7 @@ export class ChatPage implements OnInit {
   }
 
   endVideoCall(isOpen: boolean) {
+    
     if (this.peerConnection) {
       this.peerConnection.close();
       this.peerConnection = null;
@@ -349,6 +353,17 @@ export class ChatPage implements OnInit {
       this.localVideo.nativeElement.srcObject = null;
     }
     this.isVideoCallVisible = false;
+  }
+  toggleMute(){
+    if (this.localStream) {
+      this.localStream.getAudioTracks().forEach((track:any) => {
+        track.enabled = !track.enabled;  // Mute/Unmute audio
+      });
+      this.isMuted = !this.isMuted;
+    }
+  }
+  switchCamera(){
+    
   }
 
   endAudioCall() {

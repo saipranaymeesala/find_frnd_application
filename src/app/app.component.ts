@@ -37,7 +37,7 @@ export class AppComponent {
       this.navCtrl.navigateRoot('/tabs');
     } else {
       console.log('User is not logged in, navigating to login...');
-      this.navCtrl.navigateRoot('/login');
+      this.navCtrl.navigateRoot('/introduction');
     }
   }
 

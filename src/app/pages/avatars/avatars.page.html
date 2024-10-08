@@ -4,33 +4,53 @@
       <ion-back-button defaultHref="/userdetails"></ion-back-button>
     </ion-buttons>
     <ion-title>Avatars</ion-title>
-    
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
   <h1>Choose Your Avatar</h1>
   <p>Select an Avatar and choose it as your profile picture</p>
-<ion-grid><ion-row><ion-col offset="1">
-  <div class="avatar-grid" *ngIf="gender==='male'">
-    <ion-avatar *ngFor="let avatar of avatars_male; let i = index" (click)="selectAvatar(i)" [ngClass]="{'selected': selectedAvatarIndex === i}">
-      <ion-img [src]="avatar" [alt]="'Avatar ' + (i + 1)" />
-    </ion-avatar>
-  </div>
-  <div class="avatar-grid"  *ngIf="gender==='female'" >
-    <ion-avatar *ngFor="let avatar of avatar_female; let i = index" (click)="selectAvatar(i)" [ngClass]="{'selected': selectedAvatarIndex === i}">
-      <ion-img [src]="avatar" [alt]="'Avatar ' + (i + 1)" />
-    </ion-avatar>
-  </div>
-
-</ion-col></ion-row></ion-grid>
-  
-  <ion-button 
-  color="light" 
-  shape="round" 
-  fill="outline" 
-  expand="full" 
-  (click)="confirmSelection()">
-  Confirm Selection</ion-button>
-
+</ion-col>
+</ion-row>
+</ion-grid>
+  <ion-grid
+    ><ion-row
+      ><ion-col size-md="6" offset-md="3">
+        <div class="avatar-grid" *ngIf="gender==='male'">
+          <ion-avatar
+            *ngFor="let avatar of avatars_male; let i = index"
+            (click)="selectAvatar(i)"
+            [ngClass]="{'selected': selectedAvatarIndex === i}"
+          >
+            <ion-img [src]="avatar" [alt]="'Avatar ' + (i + 1)" />
+          </ion-avatar>
+        </div>
+        <div class="avatar-grid" *ngIf="gender==='female'">
+          <ion-avatar
+            *ngFor="let avatar of avatar_female; let i = index"
+            (click)="selectAvatar(i)"
+            [ngClass]="{'selected': selectedAvatarIndex === i}"
+          >
+            <ion-img [src]="avatar" [alt]="'Avatar ' + (i + 1)" />
+          </ion-avatar>
+        </div> </ion-col></ion-row
+  ></ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="8" offset-md="2">
+        <ion-button
+          color="light"
+          shape="round"
+          fill="outline"
+          expand="full"
+          (click)="confirmSelection()"
+        >
+          Confirm Selection</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

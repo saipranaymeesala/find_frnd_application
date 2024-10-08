@@ -56,7 +56,7 @@
       <ion-label >Email :{{profile.email}}</ion-label>
     </ion-item>
     
-    
+    </ion-card>
     <!-- <ion-item routerLink="/tabs" lines="none"><ion-icon name="home-outline"></ion-icon>Home</ion-item>
     <ion-item lines="none"><ion-icon name="alert-circle-outline"></ion-icon>About Dosthi</ion-item>
     <ion-item lines="none"><ion-icon name="lock-closed-outline"></ion-icon>Privacy Policy</ion-item>
@@ -116,7 +116,7 @@
         <ion-text color="light"><ion-label>Edit Profile</ion-label> </ion-text>
       </ion-item>
 
-      <ion-item>
+      <ion-item (click)="shareAppViaWhatsApp()">
         <ion-icon name="share-outline" color="secondary" slot="start" ></ion-icon>
         <ion-text color="light"> <ion-label>Share and Earn</ion-label></ion-text>
       </ion-item>
